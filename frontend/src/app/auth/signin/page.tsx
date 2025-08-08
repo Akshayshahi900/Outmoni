@@ -1,4 +1,4 @@
-"use client";
+
 
 import { signIn } from "@/lib/auth"
 import { auth } from "@/auth"
@@ -7,10 +7,11 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { DollarSign } from "lucide-react"
 import Link from "next/link"
+import { useState } from "react"
 
 export default async function SignInPage() {
   const session = await auth()
-
+ 
   if (session) {
     redirect("/dashboard")
   }

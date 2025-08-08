@@ -5,5 +5,5 @@ const router = Router();
 
 router.get('/', getExpenses);
 router.post('/', createExpense);
-
+// router.delete('/' , deleteExpenses);
 export default router;
