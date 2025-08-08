@@ -16,15 +16,16 @@
       "static/chunks/_e69f0d32._.js",
       "static/chunks/_01f48b92._.js"
     ],
-    "/dashboard/page": [
+    "/page": [
       "static/chunks/node_modules_next_dist_01fcdebf._.js",
       "static/chunks/src_app_favicon_ico_mjs_f9cadd25._.js",
       "static/chunks/src_app_globals_b805903d.css",
       "static/chunks/_81330325._.js",
       "static/chunks/src_app_layout_tsx_68b267f5._.js",
       "static/chunks/node_modules_next_dist_client_components_builtin_global-error_c045d3f1.js",
-      "static/chunks/_8c44c2d6._.js",
-      "static/chunks/src_app_dashboard_page_tsx_c045d3f1._.js",
+      "static/chunks/src_84e3a503._.js",
+      "static/chunks/node_modules_3215bcd5._.js",
+      "static/chunks/src_app_page_tsx_c045d3f1._.js",
       "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_6aaa83c7._.js",
       "static/chunks/node_modules_next_dist_compiled_react-dom_1f56dc06._.js",
       "static/chunks/node_modules_next_dist_compiled_next-devtools_index_d575f738.js",

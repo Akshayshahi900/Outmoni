@@ -1,17 +1,31 @@
 "use client"
-
 import { auth } from "@/auth"
-
-import Image from "next/image";
 import { redirect } from "next/navigation"
 import React, { useState } from "react";
-// import { getUserExpenses } from "@/lib/auth";
+
 // onchange function
 import { Bounce, toast, ToastContainer } from "react-toastify";
 
 import { Expense } from "@/types/userTypes";
 
-export default function Dashboard() {
+export default async function Dashboard() {
+
+  // auth logic
+
+  const session = await auth();
+
+  if (!session) redirect("/login");
+
+  await fetch("http://localhost:3000/api/expenses", {
+    headers: {
+      Authorization: `Bearer ${session?.user?.id}`
+    }
+  })
+    await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/me`, {
+    headers: {
+      Authorization: `Bearer ${session?.user?.id}`, // this must be the actual JWT token (fix NextAuth if needed)
+    }
+  });
 
 
   const [expenses, setExpenses] = useState({
@@ -26,7 +40,7 @@ export default function Dashboard() {
     const { name, value } = event.target;
     setExpenses((prevExpenses: Expense) => ({
       ...prevExpenses,
-      [name]:name==="amount" ?Number(value): value,
+      [name]: name === "amount" ? Number(value) : value,
     }));
   };
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -39,9 +53,9 @@ export default function Dashboard() {
       body: JSON.stringify(expenses),
     });
 
-    if(response.ok){
+    if (response.ok) {
       notify();
-      setExpenses({name:"" , category:"" , amount:0, date:""});
+      setExpenses({ name: "", category: "", amount: 0, date: "" });
     }
   };
 
@@ -62,35 +76,22 @@ export default function Dashboard() {
     );
   }
 
-  // const session = await auth();
-  
-  // if (!session) redirect("/login");
 
-  // await fetch("http://localhost:3000/api/expenses", {
-  //   headers: {
-  //     Authorization: `Bearer ${session?.user?.id}`
-  //   }
-  // })
-  // await fetch("http://localhost:5000/api/auth/me", {
-  //   headers: {
-  //     Authorization: `Bearer ${session?.user?.id}`, // this must be the actual JWT token (fix NextAuth if needed)
-  //   }
-  // });
 
   return <>
- <ToastContainer
-          position="bottom-right"
-          autoClose={4000}
-          hideProgressBar={false}
-          newestOnTop={true}
-          closeOnClick={true}
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="colored"
-          transition={Bounce}
-        />
+    <ToastContainer
+      position="bottom-right"
+      autoClose={4000}
+      hideProgressBar={false}
+      newestOnTop={true}
+      closeOnClick={true}
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="colored"
+      transition={Bounce}
+    />
     {/* <div> Welcome , {session.user?.name}</div>
     <div>
       <Image
@@ -153,14 +154,14 @@ export default function Dashboard() {
             className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
           />
         </div>
-        
+
         <button
           type="submit"
           className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-200"
         >
           Submit
         </button>
-        
+
       </form>
     </div>
 
