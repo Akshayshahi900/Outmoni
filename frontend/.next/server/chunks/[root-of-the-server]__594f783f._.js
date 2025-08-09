@@ -163,14 +163,16 @@ const authConfig = {
     secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
         async jwt ({ token, user }) {
+            //when user logs in for the first time 
             if (user) {
-                token.id = user.id;
+                token.id = user.id; // add id to the JWT
                 token.email = user.email;
                 token.name = user.name;
             }
             return token;
         },
         async session ({ session, token }) {
+            // add id to the session object for NEXT.js usage
             if (session.user) {
                 session.user.id = token.id;
                 session.user.email = token.email;
@@ -178,6 +180,9 @@ const authConfig = {
             }
             return session;
         }
+    },
+    session: {
+        strategy: "jwt"
     }
 };
 }),

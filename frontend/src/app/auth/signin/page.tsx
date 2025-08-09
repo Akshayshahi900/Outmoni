@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { DollarSign } from "lucide-react"
 import Link from "next/link"
-import { useState } from "react"
+import { signInWithCredentials, signInWithGithub, signInWithGoogle } from "@/actions/auth"
 
 export default async function SignInPage() {
   const session = await auth()
@@ -29,10 +29,7 @@ export default async function SignInPage() {
         </CardHeader>
         <CardContent className="space-y-4">
           <form
-            action={async () => {
-              "use server"
-              await signIn("google", { redirectTo: "/dashboard" })
-            }}
+            action={signInWithGoogle}
           >
             <Button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700">
               Continue with Google
@@ -40,10 +37,7 @@ export default async function SignInPage() {
           </form>
 
           <form
-            action={async () => {
-              "use server"
-              await signIn("github", { redirectTo: "/dashboard" })
-            }}
+            action={signInWithGithub}
           >
             <Button type="submit" variant="outline" className="w-full bg-transparent">
               Continue with GitHub
@@ -60,14 +54,7 @@ export default async function SignInPage() {
           </div>
 
           <form
-            action={async (formData: FormData) => {
-              "use server"
-              await signIn("credentials", {
-                email: formData.get("email") as string,
-                password: formData.get("password") as string,
-                redirectTo: "/dashboard",
-              })
-            }}
+           action={signInWithCredentials}
             className="space-y-4"
           >
             <div>

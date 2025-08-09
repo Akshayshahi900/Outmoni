@@ -1,5 +1,39 @@
 {
-  "node": {},
+  "node": {
+    "000a54b24a875f61e180dab69a00d5d3db4c6974cf": {
+      "workers": {
+        "app/auth/signin/page": {
+          "moduleId": "[project]/.next-internal/server/app/auth/signin/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/auth.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/auth/signin/page": "rsc"
+      }
+    },
+    "00655f3c9c267b72a23657bfdbafd0eaf0e2edf5cb": {
+      "workers": {
+        "app/auth/signin/page": {
+          "moduleId": "[project]/.next-internal/server/app/auth/signin/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/auth.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/auth/signin/page": "rsc"
+      }
+    },
+    "40e45c7507ddfc1584c50d20a167858a5d80690aa0": {
+      "workers": {
+        "app/auth/signin/page": {
+          "moduleId": "[project]/.next-internal/server/app/auth/signin/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/actions/auth.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/auth/signin/page": "rsc"
+      }
+    }
+  },
   "edge": {},
   "encryptionKey": "i6Jxo897hH9WOaxok1WSptlPV3vblRY/ybWvI5aKCHc="
 }

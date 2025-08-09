@@ -298,6 +298,38 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
     __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
 }
 }}),
+"[project]/src/actions/data:677b6d [app-client] (ecmascript) <text/javascript>": ((__turbopack_context__) => {
+"use strict";
+
+var { k: __turbopack_refresh__, m: module } = __turbopack_context__;
+{
+/* __next_internal_action_entry_do_not_use__ [{"00655f3c9c267b72a23657bfdbafd0eaf0e2edf5cb":"signInWithGithub"},"src/actions/auth.ts",""] */ __turbopack_context__.s({
+    "signInWithGithub": ()=>signInWithGithub
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/build/webpack/loaders/next-flight-loader/action-client-wrapper.js [app-client] (ecmascript)");
+"use turbopack no side effects";
+;
+var signInWithGithub = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createServerReference"])("00655f3c9c267b72a23657bfdbafd0eaf0e2edf5cb", __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["callServer"], void 0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["findSourceMapURL"], "signInWithGithub"); //# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4vYXV0aC50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJcInVzZSBzZXJ2ZXJcIlxuaW1wb3J0eyBzaWduSW59IGZyb20gXCJAL2xpYi9hdXRoXCJcblxuZXhwb3J0IGFzeW5jIGZ1bmN0aW9uIHNpZ25JbldpdGhHb29nbGUoKXtcbiAgICBhd2FpdCBzaWduSW4oXCJnb29nbGVcIiwge3JlZGlyZWN0VG86IFwiL2Rhc2hib2FyZFwifSlcbn1cblxuZXhwb3J0IGFzeW5jIGZ1bmN0aW9uIHNpZ25JbldpdGhHaXRodWIoKSB7XG4gIGF3YWl0IHNpZ25JbihcImdpdGh1YlwiLCB7IHJlZGlyZWN0VG86IFwiL2Rhc2hib2FyZFwiIH0pXG59XG5cbmV4cG9ydCBhc3luYyBmdW5jdGlvbiBzaWduSW5XaXRoQ3JlZGVudGlhbHMoZm9ybURhdGE6IEZvcm1EYXRhKSB7XG4gIGF3YWl0IHNpZ25JbihcImNyZWRlbnRpYWxzXCIsIHtcbiAgICBlbWFpbDogZm9ybURhdGEuZ2V0KFwiZW1haWxcIikgYXMgc3RyaW5nLFxuICAgIHBhc3N3b3JkOiBmb3JtRGF0YS5nZXQoXCJwYXNzd29yZFwiKSBhcyBzdHJpbmcsXG4gICAgcmVkaXJlY3RUbzogXCIvZGFzaGJvYXJkXCIsXG4gIH0pXG59Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI2UkFPc0IifQ==
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
+}
+}}),
+"[project]/src/actions/data:936c00 [app-client] (ecmascript) <text/javascript>": ((__turbopack_context__) => {
+"use strict";
+
+var { k: __turbopack_refresh__, m: module } = __turbopack_context__;
+{
+/* __next_internal_action_entry_do_not_use__ [{"000a54b24a875f61e180dab69a00d5d3db4c6974cf":"signInWithGoogle"},"src/actions/auth.ts",""] */ __turbopack_context__.s({
+    "signInWithGoogle": ()=>signInWithGoogle
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/build/webpack/loaders/next-flight-loader/action-client-wrapper.js [app-client] (ecmascript)");
+"use turbopack no side effects";
+;
+var signInWithGoogle = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createServerReference"])("000a54b24a875f61e180dab69a00d5d3db4c6974cf", __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["callServer"], void 0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["findSourceMapURL"], "signInWithGoogle"); //# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4vYXV0aC50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJcInVzZSBzZXJ2ZXJcIlxuaW1wb3J0eyBzaWduSW59IGZyb20gXCJAL2xpYi9hdXRoXCJcblxuZXhwb3J0IGFzeW5jIGZ1bmN0aW9uIHNpZ25JbldpdGhHb29nbGUoKXtcbiAgICBhd2FpdCBzaWduSW4oXCJnb29nbGVcIiwge3JlZGlyZWN0VG86IFwiL2Rhc2hib2FyZFwifSlcbn1cblxuZXhwb3J0IGFzeW5jIGZ1bmN0aW9uIHNpZ25JbldpdGhHaXRodWIoKSB7XG4gIGF3YWl0IHNpZ25JbihcImdpdGh1YlwiLCB7IHJlZGlyZWN0VG86IFwiL2Rhc2hib2FyZFwiIH0pXG59XG5cbmV4cG9ydCBhc3luYyBmdW5jdGlvbiBzaWduSW5XaXRoQ3JlZGVudGlhbHMoZm9ybURhdGE6IEZvcm1EYXRhKSB7XG4gIGF3YWl0IHNpZ25JbihcImNyZWRlbnRpYWxzXCIsIHtcbiAgICBlbWFpbDogZm9ybURhdGEuZ2V0KFwiZW1haWxcIikgYXMgc3RyaW5nLFxuICAgIHBhc3N3b3JkOiBmb3JtRGF0YS5nZXQoXCJwYXNzd29yZFwiKSBhcyBzdHJpbmcsXG4gICAgcmVkaXJlY3RUbzogXCIvZGFzaGJvYXJkXCIsXG4gIH0pXG59Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI2UkFHc0IifQ==
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
+}
+}}),
 "[project]/src/app/auth/signin/page.tsx [app-client] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
@@ -315,7 +347,10 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$b
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/ui/card.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$dollar$2d$sign$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__DollarSign$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/dollar-sign.js [app-client] (ecmascript) <export default as DollarSign>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/client/app-dir/link.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$actions$2f$data$3a$677b6d__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$text$2f$javascript$3e$__ = __turbopack_context__.i("[project]/src/actions/data:677b6d [app-client] (ecmascript) <text/javascript>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$actions$2f$data$3a$936c00__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$text$2f$javascript$3e$__ = __turbopack_context__.i("[project]/src/actions/data:936c00 [app-client] (ecmascript) <text/javascript>");
 "use client";
+;
 ;
 ;
 ;
@@ -385,19 +420,14 @@ async function SignInPage() {
                     className: "space-y-4",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
-                            action: async ()=>{
-                                "use server";
-                                await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$auth$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["signIn"])("google", {
-                                    redirectTo: "/dashboard"
-                                });
-                            },
+                            action: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$actions$2f$data$3a$936c00__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$text$2f$javascript$3e$__["signInWithGoogle"],
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                                 type: "submit",
                                 className: "w-full bg-emerald-600 hover:bg-emerald-700",
                                 children: "Continue with Google"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/auth/signin/page.tsx",
-                                lineNumber: 37,
+                                lineNumber: 34,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
@@ -406,12 +436,7 @@ async function SignInPage() {
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
-                            action: async ()=>{
-                                "use server";
-                                await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$auth$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["signIn"])("github", {
-                                    redirectTo: "/dashboard"
-                                });
-                            },
+                            action: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$actions$2f$data$3a$677b6d__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$text$2f$javascript$3e$__["signInWithGithub"],
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                                 type: "submit",
                                 variant: "outline",
@@ -419,12 +444,12 @@ async function SignInPage() {
                                 children: "Continue with GitHub"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/auth/signin/page.tsx",
-                                lineNumber: 48,
+                                lineNumber: 42,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/app/auth/signin/page.tsx",
-                            lineNumber: 42,
+                            lineNumber: 39,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -436,12 +461,12 @@ async function SignInPage() {
                                         className: "w-full border-t"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/auth/signin/page.tsx",
-                                        lineNumber: 55,
+                                        lineNumber: 49,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/auth/signin/page.tsx",
-                                    lineNumber: 54,
+                                    lineNumber: 48,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -451,29 +476,22 @@ async function SignInPage() {
                                         children: "Or continue with email"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/auth/signin/page.tsx",
-                                        lineNumber: 58,
+                                        lineNumber: 52,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/auth/signin/page.tsx",
-                                    lineNumber: 57,
+                                    lineNumber: 51,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/auth/signin/page.tsx",
-                            lineNumber: 53,
+                            lineNumber: 47,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
-                            action: async (formData)=>{
-                                "use server";
-                                await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$auth$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["signIn"])("credentials", {
-                                    email: formData.get("email"),
-                                    password: formData.get("password"),
-                                    redirectTo: "/dashboard"
-                                });
-                            },
+                            action: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$auth$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["signIn"],
                             className: "space-y-4",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -484,7 +502,7 @@ async function SignInPage() {
                                             children: "Email"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/auth/signin/page.tsx",
-                                            lineNumber: 74,
+                                            lineNumber: 61,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -496,13 +514,13 @@ async function SignInPage() {
                                             placeholder: "Enter your email"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/auth/signin/page.tsx",
-                                            lineNumber: 77,
+                                            lineNumber: 64,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/auth/signin/page.tsx",
-                                    lineNumber: 73,
+                                    lineNumber: 60,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -513,7 +531,7 @@ async function SignInPage() {
                                             children: "Password"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/auth/signin/page.tsx",
-                                            lineNumber: 87,
+                                            lineNumber: 74,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -525,13 +543,13 @@ async function SignInPage() {
                                             placeholder: "Enter your password"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/auth/signin/page.tsx",
-                                            lineNumber: 90,
+                                            lineNumber: 77,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/auth/signin/page.tsx",
-                                    lineNumber: 86,
+                                    lineNumber: 73,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -540,13 +558,13 @@ async function SignInPage() {
                                     children: "Sign In"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/auth/signin/page.tsx",
-                                    lineNumber: 99,
+                                    lineNumber: 86,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/auth/signin/page.tsx",
-                            lineNumber: 62,
+                            lineNumber: 56,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -557,7 +575,7 @@ async function SignInPage() {
                                     children: "Don't have an account? "
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/auth/signin/page.tsx",
-                                    lineNumber: 105,
+                                    lineNumber: 92,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -566,13 +584,13 @@ async function SignInPage() {
                                     children: "Sign up"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/auth/signin/page.tsx",
-                                    lineNumber: 106,
+                                    lineNumber: 93,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/auth/signin/page.tsx",
-                            lineNumber: 104,
+                            lineNumber: 91,
                             columnNumber: 11
                         }, this)
                     ]
@@ -602,4 +620,4 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 }}),
 }]);
 
-//# sourceMappingURL=src_cec51306._.js.map
+//# sourceMappingURL=src_5d693aa1._.js.map
