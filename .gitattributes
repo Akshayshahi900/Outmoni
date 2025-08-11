@@ -1,0 +1,12 @@
+# Treat these as generated so they don't count toward stats
+frontend/.next/* linguist-generated=true
+backend/dist/* linguist-generated=true
+
+# Ignore config JS from stats
+next.config.js linguist-generated=true
+postcss.config.js linguist-generated=true
+tailwind.config.js linguist-generated=true
+
+# Ignore all .js except in node_modules (just in case)
+*.js linguist-generated=true
+*.jsx linguist-generated=true
