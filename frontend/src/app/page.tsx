@@ -17,8 +17,11 @@ import {
 import Link from "next/link"
 import Image from "next/image"
 import { redirect } from "next/navigation"
+import { getServerSession } from "next-auth"
+import { authConfig } from "@/auth.config"
 
-export default function Home() {
+export default  async function Home() {
+  const session = await getServerSession(authConfig);
   return (
     <div className="flex flex-col min-h-screen bg-white">
       {/* Header */}
@@ -28,8 +31,8 @@ export default function Home() {
           <span className="ml-2 text-2xl font-bold text-gray-900">OUTMONI</span>
         </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6">
-          <Link className="text-sm font-medium hover:text-emerald-600 transition-colors" href="#features">
-            Features
+          <Link className="text-sm font-medium hover:text-emerald-600 transition-colors" href="/dashboard">
+            Dashboard
           </Link>
           <Link className="text-sm font-medium hover:text-emerald-600 transition-colors" href="#pricing">
             Pricing
@@ -41,19 +44,27 @@ export default function Home() {
             Contact
           </Link>
         </nav>
-        <div className="ml-6 flex gap-2">
-          <Button
-            variant="ghost"
-            size="sm"
+        {session ? (
+          <div className="ml-6 flex gap-2">
+            <p className="text-md p-2 bg-green-300  border-2 rounded-3xl font-medium text-gray-900">
+              Welcome Back!
+            </p>
+          </div>
+        ) : (
+          <div className="ml-6 flex gap-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => redirect("/auth/signin")}
+            >
+              Sign In
+            </Button>
 
-            onClick={() => redirect("/auth/signin")}
-          >
-            Sign In
-          </Button>
-          <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700"  onClick={() => redirect("/auth/signin")}>
-            Get Started
-          </Button>
-        </div>
+            <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700" onClick={() => redirect("/auth/signin")}>
+              Get Started
+            </Button>
+          </div>
+        )}
       </header>
 
       <main className="flex-1">

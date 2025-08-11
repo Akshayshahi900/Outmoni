@@ -1,20 +1,24 @@
-
-
-import { signIn } from "@/lib/auth"
-import { auth } from "@/auth"
+// use client doesnot redirect and auth()
+"use client"
+import { signIn, useSession } from "next-auth/react"
 import { redirect } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { DollarSign } from "lucide-react"
 import Link from "next/link"
 import { signInWithCredentials, signInWithGithub, signInWithGoogle } from "@/actions/auth"
-
-export default async function SignInPage() {
-  const session = await auth()
- 
-  if (session) {
-    redirect("/dashboard")
+export default function SignInPage() {
+  const { data: session, status } = useSession();
+  if (status === 'authenticated') {
+    redirect('/dashboard')
   }
+
+const handleGoogleSignIn = () => {
+    signIn('google', {
+      callbackUrl: '/dashboard', // Where to redirect after sign-in
+    })
+  }
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-50 to-teal-50 px-4">
@@ -28,33 +32,28 @@ export default async function SignInPage() {
           <CardDescription>Sign in to your account to continue</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <form
-            action={signInWithGoogle}
-          >
-            <Button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700">
-              Continue with Google
-            </Button>
-          </form>
 
-          <form
-            action={signInWithGithub}
-          >
-            <Button type="submit" variant="outline" className="w-full bg-transparent">
-              Continue with GitHub
-            </Button>
-          </form>
+          <Button onClick={handleGoogleSignIn} type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700">
+            Continue with Google
+          </Button>
+          {status === 'loading' && <p>Loading...</p>}
 
-          <div className="relative">
+          {/* <Button onclick={signInWithGithub} type="submit" variant="outline" className="w-full bg-transparent">
+            Continue with GitHub
+          </Button> */}
+
+
+          {/* <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <span className="w-full border-t" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
               <span className="bg-white px-2 text-gray-500">Or continue with email</span>
             </div>
-          </div>
+          </div> */}
 
-          <form
-           action={signInWithCredentials}
+          {/* <form
+            action={signInWithCredentials}
             className="space-y-4"
           >
             <div>
@@ -86,7 +85,7 @@ export default async function SignInPage() {
             <Button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700">
               Sign In
             </Button>
-          </form>
+          </form> */}
 
           <div className="text-center text-sm">
             <span className="text-gray-600">{"Don't have an account? "}</span>

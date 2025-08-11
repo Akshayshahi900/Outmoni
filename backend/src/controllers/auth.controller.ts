@@ -12,19 +12,24 @@ interface AuthenticatedRequest extends Request {
 }
 
 // ✅ Called after frontend sends token, backend verifies it, and injects `req.user`
-export const createUserIfNotExists = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+export const createUserIfNotExists = async (
+  req: AuthenticatedRequest,
+  res: Response,
+  next: NextFunction
+) => {
   try {
-    const { email, name } = req.user!;
-
+    if (!req.user || !req.user.email) {
+      return res.status(400).json({ message: "User info missing from request" });
+    }
+    const { email, name } = req.user;
     let user = await prisma.user.findUnique({ where: { email } });
     if (!user) {
       user = await prisma.user.create({
-        data: { email, name },
-      });
+        data: { email, name: name || null },
+      })
     }
-
     res.status(200).json(user);
-  } catch (error) {
+  }catch(error){
     next(error);
   }
 };

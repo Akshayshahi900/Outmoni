@@ -164,8 +164,9 @@ const authConfig = {
     callbacks: {
         async jwt ({ token, user }) {
             //when user logs in for the first time 
+            console.log("JWT callback", token, user);
             if (user) {
-                token.id = user.id; // add id to the JWT
+                token.userId = user.id; // add id to the JWT
                 token.email = user.email;
                 token.name = user.name;
             }
@@ -173,17 +174,16 @@ const authConfig = {
         },
         async session ({ session, token }) {
             // add id to the session object for NEXT.js usage
+            console.log("Session callback", session, token);
             if (session.user) {
-                session.user.id = token.id;
+                session.userId = token.userId;
                 session.user.email = token.email;
                 session.user.name = token.name;
             }
             return session;
         }
     },
-    session: {
-        strategy: "jwt"
-    }
+    debug: true
 };
 }),
 "[project]/src/app/api/auth/[...nextauth]/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {

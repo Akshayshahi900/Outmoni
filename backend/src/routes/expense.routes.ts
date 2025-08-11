@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import { getExpenses, createExpense } from '../controllers/expense.controller';
-import { authMiddleware } from '../middlewares/auth';
+import { verifyAuth } from '../middlewares/verifyAuth';
 
 const router = Router();
 
-router.get('/', authMiddleware ,getExpenses);
-router.post('/', createExpense);
-// router.delete('/' , deleteExpenses);
+router.get('/', verifyAuth, getExpenses);
+router.post('/', verifyAuth, createExpense);
+// router.delete('/', verifyAuth, deleteExpenses);
 export default router;

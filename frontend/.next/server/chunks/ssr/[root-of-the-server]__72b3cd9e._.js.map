@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 29, "column": 0}, "map": {"version":3,"sources":["file:///home/akshay/Code/Full%20stack/Finance/frontend/src/actions/auth.ts"],"sourcesContent":["\"use client\"\nimport{ signIn} from \"next-auth/react\"\n\nexport async function signInWithGoogle(){\n    await signIn(\"google\", {callbackUrl: \"/dashboard\"})\n}\n\nexport async function signInWithGithub() {\n  await signIn(\"github\", { callbackUrl: \"/dashboard\" })\n}\n\nexport async function signInWithCredentials(formData: FormData) {\n  await signIn(\"credentials\", {\n    email: formData.get(\"email\") as string,\n    password: formData.get(\"password\") as string,\n    callbackUrl: \"/dashboard\",\n  })\n}"],"names":[],"mappings":";;;;;AACA;AADA;;AAGO,eAAe;IAClB,MAAM,CAAA,GAAA,8IAAA,CAAA,SAAM,AAAD,EAAE,UAAU;QAAC,aAAa;IAAY;AACrD;AAEO,eAAe;IACpB,MAAM,CAAA,GAAA,8IAAA,CAAA,SAAM,AAAD,EAAE,UAAU;QAAE,aAAa;IAAa;AACrD;AAEO,eAAe,sBAAsB,QAAkB;IAC5D,MAAM,CAAA,GAAA,8IAAA,CAAA,SAAM,AAAD,EAAE,eAAe;QAC1B,OAAO,SAAS,GAAG,CAAC;QACpB,UAAU,SAAS,GAAG,CAAC;QACvB,aAAa;IACf;AACF","debugId":null}}]
+}
