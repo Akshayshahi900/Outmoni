@@ -909,10 +909,6 @@
     overflow: hidden;
   }
 
-  .rounded {
-    border-radius: .25rem;
-  }
-
   .rounded-3xl {
     border-radius: var(--radius-3xl);
   }

@@ -55,12 +55,12 @@ export default  async function Home() {
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => redirect("/auth/signin")}
+              onClick={redirect("/auth/signin")}
             >
               Sign In
             </Button>
 
-            <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700" onClick={() => redirect("/auth/signin")}>
+            <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700" onClick={redirect("/auth/signin")}>
               Get Started
             </Button>
           </div>

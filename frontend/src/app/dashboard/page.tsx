@@ -1,9 +1,4 @@
-
 import { redirect } from "next/navigation"
-
-// onchange function
-
-
 import { Expense } from "@/types/userTypes";
 import { getServerSession } from "next-auth";
 import { authConfig } from "@/auth.config";
@@ -20,36 +15,23 @@ export default async function Dashboard() {
 
   if (!session) redirect("/auth/signin");
 
-  export async function sendToBackend(data:any){
-    const session = await getSession();
 
-    if(!session) throw new Error(" Not authenticated ");
+  let initialExpenses:Expense[] = [];
 
-    // The NextAuth JWT is stored in session.access
-
-  }
-  let initialExpenses:Expense[] = []
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/expenses`, {
+      method:"GET",
       headers: {
         Authorization: `Bearer ${session.user?.id}`,
-      },
-      body: JSON.stringify({
-      })
-
-    if(response.ok){
-        initialExpenses = await response.json()
       }
+    });
+    if(response.ok){
+      initialExpenses = await response.json();
+    }
   }
   catch (error) {
     console.log("Failed to fetch expenses", error);
   }
-
-
-  //toast
-
-
-
   return (
     <DashboardClient session={session} initialExpenses={initialExpenses} />
   )

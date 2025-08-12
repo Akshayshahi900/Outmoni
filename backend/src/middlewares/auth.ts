@@ -18,7 +18,7 @@ export const authMiddleware = (req:Request , res:Response , next:NextFunction)=>
     const decoded = jwt.verify(token , process.env.JWT_SECRET!) as User & {id:string};
 
     //attach the user to the request object
-    req.user = decoded;
+    // req.user = decoded;
     console.log("Authenticated user:", req.user);
     next();
 

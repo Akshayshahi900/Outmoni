@@ -162,10 +162,25 @@ const authConfig = {
     },
     secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
+        async signIn ({ user }) {
+            //send request to backend to crreate user
+            await fetch(`${("TURBOPACK compile-time value", "http://localhost:5000")}/api/users/register`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: user.email,
+                    name: user.name
+                })
+            });
+            return true;
+        },
         async jwt ({ token, user }) {
             //when user logs in for the first time 
             console.log("JWT callback", token, user);
             if (user) {
+                // token.accessToken = user.token;
                 token.userId = user.id; // add id to the JWT
                 token.email = user.email;
                 token.name = user.name;
@@ -183,7 +198,10 @@ const authConfig = {
             return session;
         }
     },
-    debug: true
+    debug: true,
+    session: {
+        strategy: "jwt"
+    }
 };
 }),
 "[project]/src/app/api/auth/[...nextauth]/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {

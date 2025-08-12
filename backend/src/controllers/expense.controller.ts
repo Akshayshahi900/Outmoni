@@ -5,57 +5,36 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export const getExpenses = async (req: Request, res: Response) => {
-  try {
-    const userId = req.user?.id; //from JWT/session middlewares
-    if (!userId) {
-      return res.status(401).json({ error: "UNAUTHORIZED" });
-    }
-      const expenses = await prisma.expense.findMany({ where: { userId } });
+   try {
+    const userId = (req as any).userId;
+    const expenses = await prisma.expense.findMany({
+      where: { userId },
+    });
     res.json(expenses);
-  }
-  catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Server error" });
-
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching expenses", error });
   }
 
 };
 
 export const createExpense = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { name, amount, category } = req.body;
+    const userId = (req as any).userId;
 
-//   const { name, amount, category, userId } = req.body;
-//   if(!userId){
-//     return res.status(401).json({error:"UNAUTHORIZED"});
-//   }
-//   try {
-//     const expense = await prisma.expense.create({
-//       data: { name, amount, category, userId },
-//     });
-//     res.json(expense);
-//   } catch (error) {
-//   console.error("Error creating expense:", error);
-//   return res.status(500).json({ error: "Failed to create expense" });
-// }
+    const expense = await prisma.expense.create({
+      data: {
+        name,
+        amount,
+        category,
+        userId, // store the userId from header
+      },
+    });
 
-try{
-  const userId = req.user?.id; //Extracting from the jwt session 
-  if(!userId){
-    return res.status(401).json({error:"UNAUTHORIZED"});
-    
+    res.status(201).json(expense);
+  } catch (error) {
+    res.status(500).json({ message: "Error creating expense", error });
   }
-  const {name, amount, category} = req.body;
-  if(!name|| !amount || !category){
-    return res.status(400).json({error:"Missing required fields"});
-  }
-  const expense   = await prisma.expense.create({
-    data:{name , amount :Number(amount) , category , userId},
-  });
-res.json(expense);
-
-}
-catch(error){
-  next(error);
-}
 };
 
 

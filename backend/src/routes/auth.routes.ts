@@ -1,12 +1,9 @@
-import { Router } from 'express';
-import { authenticateUser } from '../middlewares/error.middleware';
-import { createUserIfNotExists } from '../controllers/auth.controller';
-
+import {Router} from "express";
+import { registerUser } from "../controllers/auth.controller";
 
 const router = Router();
 
 
-router.get('/me', authenticateUser, createUserIfNotExists);
-
+router.post("/users/register", registerUser);
 
 export default router;

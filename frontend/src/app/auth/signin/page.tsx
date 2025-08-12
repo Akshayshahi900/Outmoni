@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { DollarSign } from "lucide-react"
 import Link from "next/link"
-import { signInWithCredentials, signInWithGithub, signInWithGoogle } from "@/actions/auth"
 export default function SignInPage() {
   const { data: session, status } = useSession();
   if (status === 'authenticated') {
