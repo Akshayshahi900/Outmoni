@@ -303,7 +303,7 @@ const authConfig = {
         async jwt (param) {
             let { token, user } = param;
             //when user logs in for the first time 
-            console.log("JWT callback", token, user);
+            console.log("JWT callback with token and user", token, user);
             if (user) {
                 // token.accessToken = user.token;
                 token.userId = user.id; // add id to the JWT

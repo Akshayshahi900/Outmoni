@@ -122,7 +122,7 @@ const authConfig = {
         },
         async jwt ({ token, user }) {
             //when user logs in for the first time 
-            console.log("JWT callback", token, user);
+            console.log("JWT callback with token and user", token, user);
             if (user) {
                 // token.accessToken = user.token;
                 token.userId = user.id; // add id to the JWT
@@ -204,7 +204,7 @@ async function Dashboard() {
     let initialExpenses = [];
     try {
         const response = await fetch(`${("TURBOPACK compile-time value", "http://localhost:5000")}/api/expenses`, {
-            method: "GET",
+            method: "POST",
             headers: {
                 Authorization: `Bearer ${session.user?.id}`
             }

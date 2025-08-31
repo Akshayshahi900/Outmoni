@@ -31,7 +31,7 @@ export const authConfig: NextAuthOptions = {
     },
     async jwt({ token, user }) {
       //when user logs in for the first time 
-      console.log("JWT callback", token, user);
+      console.log("JWT callback with token and user", token, user);
 
       if (user) {
         // token.accessToken = user.token;

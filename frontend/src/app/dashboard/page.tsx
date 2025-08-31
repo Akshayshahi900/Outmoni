@@ -1,38 +1,43 @@
-import { redirect } from "next/navigation"
-import { Expense } from "@/types/userTypes";
-import { getServerSession } from "next-auth";
-import { authConfig } from "@/auth.config";
-import DashboardClient from "@/components/DashboardClient";
-import { getSession } from "next-auth/react";
+import StatCards from "@/features/stats/StatCards"
+import TransactionList from "@/features/expenses/TransactionList"
+import { useState } from "react";
 
-export default async function Dashboard() {
-
-  // auth logic
-
-  const session = await getServerSession(authConfig);
-
-
-
-  if (!session) redirect("/auth/signin");
-
-
-  let initialExpenses:Expense[] = [];
-
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/expenses`, {
-      method:"GET",
-      headers: {
-        Authorization: `Bearer ${session.user?.id}`,
-      }
-    });
-    if(response.ok){
-      initialExpenses = await response.json();
-    }
-  }
-  catch (error) {
-    console.log("Failed to fetch expenses", error);
+export default function DashboardPage() 
+{
+  const [expenses , setExpenses] = useState<any[]>([]);
+  function handleAdd(newExpense: any) {
+    setExpenses([...expenses, {id:Date.now(), ...newExpense}]);
   }
   return (
-    <DashboardClient session={session} initialExpenses={initialExpenses} />
+    <div className="grid gap-6">
+       <div className="p-6">
+      <h1 className="text-2xl mb-4">expenses</h1>
+      <table className="w-full border">
+        <thead>
+          <tr className="border-b">
+            <th className="p-2">Title</th>
+            <th className="p-2">Amount</th>
+            <th className="p-2">Type</th>
+            <th className="p-2">Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {expenses.map(tx => (
+            <tr key={tx.id} className="border-b">
+              <td className="p-2">{tx.title}</td>
+              <td className="p-2">${tx.amount}</td>
+              <td className="p-2">{tx.type}</td>
+              <td className="p-2">{tx.date}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {/* Add Expense Button & Modal */}
+      <AddExpenseModal onAdd={handleAdd} />
+    </div>
+      <StatCards />
+      <TransactionList />
+    </div>
   )
 }
