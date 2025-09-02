@@ -6,13 +6,15 @@ import AddExpenseModal from "@/components/addExpenseModal";
 import KPICard from "@/components/KPICards";
 import InfoCard from "@/components/InfoCard";
 import { ArrowDownCircle, ArrowUpCircle, Wallet } from "lucide-react";
-
+import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import Linechart from "@/components/Linechart";
 
 export default function DashboardPage() {
   const [expenses, setExpenses] = useState<any[]>([]);
   function handleAdd(newExpense: any) {
     setExpenses([...expenses, { id: Date.now(), ...newExpense }]);
   }
+  const data = [{ name: 'Page A', uv: 400, pv: 2400, amt: 2400 }];
   return (<>
     <div className="space-y-6">
       {/* Header Section */}
@@ -23,10 +25,14 @@ export default function DashboardPage() {
 
       {/* KPI Cards Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <InfoCard title="Balance" value="$5190.19" icon={Wallet} color="blue"  />
+        <InfoCard title="Balance" value="$5190.19" icon={Wallet} color="blue" />
         <InfoCard title="Income" value="$2187.14" icon={ArrowUpCircle} color="green" />
         <InfoCard title="Expenses" value="$1912.52" icon={ArrowDownCircle} color="red" />
       </div>
+
+
+      {/* Charts of data */}
+      <Linechart />
 
       {/* Statistics Cards - Optional additional metrics */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

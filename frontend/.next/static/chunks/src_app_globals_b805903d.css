@@ -160,9 +160,7 @@
 @layer theme {
   :root, :host {
     --color-red-100: #ffe2e2;
-    --color-red-400: #ff6568;
     --color-red-500: #fb2c36;
-    --color-red-600: #e40014;
     --color-red-700: #bf000f;
     --color-red-800: #9f0712;
     --color-yellow-400: #fac800;
@@ -205,7 +203,6 @@
     --container-sm: 24rem;
     --container-md: 28rem;
     --container-5xl: 64rem;
-    --container-6xl: 72rem;
     --text-xs: .75rem;
     --text-xs--line-height: calc(1 / .75);
     --text-sm: .875rem;
@@ -247,9 +244,7 @@
   @supports (color: color(display-p3 0 0 0)) {
     :root, :host {
       --color-red-100: color(display-p3 .980386 .889727 .887779);
-      --color-red-400: color(display-p3 .933534 .431676 .423491);
       --color-red-500: color(display-p3 .903738 .262579 .253307);
-      --color-red-600: color(display-p3 .830323 .140383 .133196);
       --color-red-700: color(display-p3 .692737 .116232 .104679);
       --color-red-800: color(display-p3 .569606 .121069 .108493);
       --color-yellow-400: color(display-p3 .959941 .790171 .0585198);
@@ -292,9 +287,7 @@
   @supports (color: lab(0% 0 0)) {
     :root, :host {
       --color-red-100: lab(92.243% 10.2865 3.83865);
-      --color-red-400: lab(63.7053% 60.745 31.3109);
       --color-red-500: lab(55.4814% 75.0732 48.8528);
-      --color-red-600: lab(48.4493% 77.4328 61.5452);
       --color-red-700: lab(40.4273% 67.2623 53.7441);
       --color-red-800: lab(33.7174% 55.8993 41.0293);
       --color-yellow-400: lab(83.2664% 8.65132 106.895);
@@ -902,10 +895,6 @@
     margin-block: calc(var(--spacing) * 1);
   }
 
-  .my-28 {
-    margin-block: calc(var(--spacing) * 28);
-  }
-
   .mt-1\.5 {
     margin-top: calc(var(--spacing) * 1.5);
   }
@@ -1061,11 +1050,6 @@
     height: auto;
   }
 
-  .h-fit {
-    height: -moz-fit-content;
-    height: fit-content;
-  }
-
   .h-full {
     height: 100%;
   }
@@ -1157,10 +1141,6 @@
 
   .max-w-5xl {
     max-width: var(--container-5xl);
-  }
-
-  .max-w-6xl {
-    max-width: var(--container-6xl);
   }
 
   .max-w-\[600px\] {
@@ -1259,14 +1239,6 @@
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 
-  .grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .grid-cols-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
   .grid-rows-\[auto_auto\] {
     grid-template-rows: auto auto;
   }
@@ -1317,10 +1289,6 @@
 
   .gap-6 {
     gap: calc(var(--spacing) * 6);
-  }
-
-  .gap-7 {
-    gap: calc(var(--spacing) * 7);
   }
 
   :where(.space-y-2 > :not(:last-child)) {
@@ -1559,10 +1527,6 @@
     background-color: var(--color-gray-50);
   }
 
-  .bg-gray-100 {
-    background-color: var(--color-gray-100);
-  }
-
   .bg-green-100 {
     background-color: var(--color-green-100);
   }
@@ -1585,10 +1549,6 @@
 
   .bg-red-100 {
     background-color: var(--color-red-100);
-  }
-
-  .bg-red-400 {
-    background-color: var(--color-red-400);
   }
 
   .bg-secondary {
@@ -1729,10 +1689,6 @@
     padding-inline: calc(var(--spacing) * 4);
   }
 
-  .px-5 {
-    padding-inline: calc(var(--spacing) * 5);
-  }
-
   .px-6 {
     padding-inline: calc(var(--spacing) * 6);
   }
@@ -1763,10 +1719,6 @@
 
   .py-12 {
     padding-block: calc(var(--spacing) * 12);
-  }
-
-  .pt-1 {
-    padding-top: calc(var(--spacing) * 1);
   }
 
   .pt-6 {
@@ -1932,10 +1884,6 @@
     color: var(--color-green-500);
   }
 
-  .text-green-600 {
-    color: var(--color-green-600);
-  }
-
   .text-green-700 {
     color: var(--color-green-700);
   }
@@ -1962,10 +1910,6 @@
 
   .text-red-500 {
     color: var(--color-red-500);
-  }
-
-  .text-red-600 {
-    color: var(--color-red-600);
   }
 
   .text-red-700 {
@@ -3162,12 +3106,6 @@
   }
 
   @media (min-width: 40rem) {
-    .sm\:grid-cols-3 {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-  }
-
-  @media (min-width: 40rem) {
     .sm\:flex-row {
       flex-direction: row;
     }
@@ -3205,12 +3143,6 @@
   }
 
   @media (min-width: 48rem) {
-    .md\:grid {
-      display: grid;
-    }
-  }
-
-  @media (min-width: 48rem) {
     .md\:w-\[var\(--radix-navigation-menu-viewport-width\)\] {
       width: var(--radix-navigation-menu-viewport-width);
     }
@@ -3219,18 +3151,6 @@
   @media (min-width: 48rem) {
     .md\:w-auto {
       width: auto;
-    }
-  }
-
-  @media (min-width: 48rem) {
-    .md\:grid-cols-2 {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
-  @media (min-width: 48rem) {
-    .md\:grid-cols-3 {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 
@@ -3318,12 +3238,6 @@
   }
 
   @media (min-width: 64rem) {
-    .lg\:grid {
-      display: grid;
-    }
-  }
-
-  @media (min-width: 64rem) {
     .lg\:grid-cols-3 {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
@@ -3404,10 +3318,6 @@
     .dark\:bg-destructive\/60:is(.dark *) {
       background-color: color-mix(in oklab, var(--destructive) 60%, transparent);
     }
-  }
-
-  .dark\:bg-gray-900:is(.dark *) {
-    background-color: var(--color-gray-900);
   }
 
   .dark\:bg-input\/30:is(.dark *) {
