@@ -35,7 +35,7 @@ export default function AddExpenseModal({ onAdd }: { onAdd: (data: any) => void 
       {/* Modal */}
       {open && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/40">
-          <div className="bg-white p-6 rounded-2xl w-96">
+          <div className="bg-white p-6 rounded-2xl ">
             <h2 className="text-xl mb-4">Add Transaction</h2>
             <form onSubmit={handleSubmit} className="space-y-3">
               <input 

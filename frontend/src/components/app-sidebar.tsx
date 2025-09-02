@@ -49,7 +49,7 @@ export function AppSidebar({ session }: SidebarProps) {
         <SidebarGroup>
           <SidebarGroupLabel>
             <Link className="flex items-center justify-center" href="/">
-              <DollarSign className="h-8 w-8 text-emerald-600" />
+              {/* <DollarSign className="h-8 w-8 text-emerald-600" /> */}
               <span className="ml-2 text-2xl font-bold text-gray-900">OUTMONI</span>
             </Link>
           </SidebarGroupLabel>

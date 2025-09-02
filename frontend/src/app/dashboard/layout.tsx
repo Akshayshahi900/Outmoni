@@ -27,11 +27,11 @@ if(!session) redirect("/auth/signin");
         <AppSidebar session={session} />
 
         {/* Main Area */}
-        <div className="flex flex-col flex-1">
+        <div className="flex flex-col  flex-1">
           {/* Optional header */}
           {/* <Header session={session} /> */}
 
-          <main className="p-6 flex-1 w-full overflow-y-auto">
+          <main className="p-6  overflow-y-auto">
             {/* Sidebar toggle button */}
             <SidebarTrigger />
 
