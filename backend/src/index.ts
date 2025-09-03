@@ -19,10 +19,10 @@ app.get('/', (req, res) => {
   res.send('Finance Tracker Backend is Live 🚀');
 });
 //Public routes
-app.use('/api', authRoutes); // used for user registration and login
+app.use('/api/auth', authRoutes); // used for user registration and login
 
 //Protected routes
-app.use('/api', verifyAuth);
+
 app.use('/api/expenses', verifyAuth, expenseRoutes);
 
 //Global error handler
