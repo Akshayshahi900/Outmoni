@@ -1,19 +1,38 @@
 "use client"
 import StatCards from "@/features/stats/StatCards"
 import ExpenseList from "@/features/expenses/ExpenseList"
-import { useState } from "react";
-import AddExpenseModal from "@/components/addExpenseModal";
+import { useEffect, useState } from "react";
+// import AddExpenseModal from "@/components/addExpenseModal";
 import KPICard from "@/components/KPICards";
 import InfoCard from "@/components/InfoCard";
 import { ArrowDownCircle, ArrowUpCircle, Wallet } from "lucide-react";
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import Linechart from "@/components/Linechart";
+import AddExpenseModal from "@/components/addExpenseModal";
 
 export default function DashboardPage() {
+
   const [expenses, setExpenses] = useState<any[]>([]);
   function handleAdd(newExpense: any) {
-    setExpenses([...expenses, { id: Date.now(), ...newExpense }]);
-  }
+    setExpenses((prev) => [...prev, newExpense]);
+  } 
+
+  useEffect(() => {
+    async function fetchExpenses() {
+
+      const res = await fetch("/api/expenses");
+      if (res.ok) {
+        const data = await res.json();
+        setExpenses(data);
+      }
+    }
+    fetchExpenses();
+  }, [])
+
+
+
+
+
   const data = [{ name: 'Page A', uv: 400, pv: 2400, amt: 2400 }];
   return (<>
     <div className="space-y-6">

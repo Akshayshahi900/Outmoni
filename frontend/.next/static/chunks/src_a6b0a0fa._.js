@@ -320,6 +320,7 @@ const authConfig = {
                 session.userId = token.userId;
                 session.user.email = token.email;
                 session.user.name = token.name;
+                session.accessToken = token;
             }
             return session;
         }

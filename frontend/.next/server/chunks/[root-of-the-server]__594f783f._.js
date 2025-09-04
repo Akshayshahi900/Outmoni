@@ -156,6 +156,9 @@ const authConfig = {
             clientSecret: process.env.GOOGLE_CLIENT_SECRET
         })
     ],
+    session: {
+        strategy: "jwt"
+    },
     pages: {
         signIn: "/auth/signin",
         signOut: "/auth/signout"
@@ -194,14 +197,12 @@ const authConfig = {
                 session.userId = token.userId;
                 session.user.email = token.email;
                 session.user.name = token.name;
+                session.accessToken = token;
             }
             return session;
         }
     },
-    debug: true,
-    session: {
-        strategy: "jwt"
-    }
+    debug: true
 };
 }),
 "[project]/src/app/api/auth/[...nextauth]/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {

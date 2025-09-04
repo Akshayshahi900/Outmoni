@@ -25,6 +25,8 @@ export const createExpense = async (req: Request, res: Response, next: NextFunct
     const { name, amount, category } = req.body;
     const userId = req.user?.id;
 
+    if (!userId) return res.status(401).json({ error: "UNAUTHORIZED" });
+
     const expense = await prisma.expense.create({
       data: {
         name,

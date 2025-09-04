@@ -9,6 +9,9 @@ export const authConfig: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
   ],
+  session:{
+    strategy:"jwt",
+  },
   pages: {
     signIn: "/auth/signin",
     signOut: "/auth/signout",
@@ -48,6 +51,7 @@ export const authConfig: NextAuthOptions = {
         session.userId = token.userId as string;
         session.user.email = token.email as string;
         session.user.name = token.name as string;
+        session.accessToken = token; 
       }
       return session;
     },
@@ -59,9 +63,5 @@ export const authConfig: NextAuthOptions = {
 
   },
   debug:true,
-  
-  session: {
-    strategy: "jwt"
-  },
 }
 
