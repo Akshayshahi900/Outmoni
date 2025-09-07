@@ -22,16 +22,17 @@ export const getExpenses = async (req: Request, res: Response) => {
 
 export const createExpense = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { name, amount, category } = req.body;
+    const { title, amount, category, date } = req.body;
     const userId = req.user?.id;
 
     if (!userId) return res.status(401).json({ error: "UNAUTHORIZED" });
 
     const expense = await prisma.expense.create({
       data: {
-        name,
-        amount,
-        category,
+        title:String(title),
+        amount:Number(req.body.amount),
+        category:String(category),
+        date:new Date(date),
         userId, // store the userId from header
       },
     });

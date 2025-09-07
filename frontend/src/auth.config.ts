@@ -1,6 +1,7 @@
 import GoogleProvider from "next-auth/providers/google";
 import type { NextAuthOptions } from "next-auth";
 import { debug } from "console";
+import { UserRoundIcon } from "lucide-react";
 
 export const authConfig: NextAuthOptions = {
   providers: [
@@ -9,8 +10,8 @@ export const authConfig: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
   ],
-  session:{
-    strategy:"jwt",
+  session: {
+    strategy: "jwt",
   },
   pages: {
     signIn: "/auth/signin",
@@ -19,25 +20,43 @@ export const authConfig: NextAuthOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    async signIn({user}) {
-      //send request to backend to crreate user
-      await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/register`, {
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({
-          email:user.email,
-          name:user.name
-        })
-      });
-      return true;
-      
+    async signIn({ user }) {
+
+
+      try {
+        console.log('NextAuth signIn - attempting to register user:', user);
+
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/register`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            googleId: user.id,
+            email: user.email,
+            name: user.name
+          })
+        });
+
+        const data = await response.json();
+        console.log('Registration response:', response.status, data);
+
+        if (!response.ok) {
+          console.error('Registration failed:', data);
+        }
+
+        return true;
+      } catch (error) {
+        console.error('Error registering user:', error);
+        return true; // Don't block login
+      }
     },
     async jwt({ token, user }) {
       //when user logs in for the first time 
       console.log("JWT callback with token and user", token, user);
 
       if (user) {
+
         // token.accessToken = user.token;
+        token.googleId = user.id;
         token.userId = user.id as string; // add id to the JWT
         token.email = user.email as string;
         token.name = user.name as string;
@@ -51,17 +70,17 @@ export const authConfig: NextAuthOptions = {
         session.userId = token.userId as string;
         session.user.email = token.email as string;
         session.user.name = token.name as string;
-        session.accessToken = token; 
+        session.accessToken = token;
       }
       return session;
     },
-  
+
 
     //    async redirect() {
     //   return `/dashboard`;
     // }
 
   },
-  debug:true,
+  debug: true,
 }
 

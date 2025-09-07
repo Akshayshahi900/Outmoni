@@ -12,13 +12,22 @@ export default function AddExpenseModal({ onAdd }: { onAdd: (data: any) => void 
   const [open, setOpen] = useState(false)
   const [form, setForm] = useState({
     title: "",
-    amount: "",
-    type: "expense",
+    amount: 0,
+    category: "expense",
     date: new Date().toISOString().slice(0, 10),
   })
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
-    setForm({ ...form, [e.target.name]: e.target.value })
+    const {name , value} = e.target;
+     setForm({
+    ...form,
+    [name]:
+      name === "amount"
+        ? Number(value) // convert string → number
+        : name === "date"
+        ? new Date(value).toISOString() // convert string → ISO DateTime
+        : value,
+  })
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -41,8 +50,8 @@ export default function AddExpenseModal({ onAdd }: { onAdd: (data: any) => void 
       onAdd(newExpense);
       setForm({
         title: "",
-        amount: "",
-        type: "expense",
+        amount: 0,
+        category: "expense",
         date: new Date().toISOString().slice(0, 10),
       })
       setOpen(false);
@@ -89,8 +98,8 @@ export default function AddExpenseModal({ onAdd }: { onAdd: (data: any) => void 
                 className="w-full border p-2 rounded"
               />
               <select
-                name="type"
-                value={form.type}
+                name="category"
+                value={form.category}
                 onChange={handleChange}
                 className="w-full border p-2 rounded"
               >
@@ -100,7 +109,7 @@ export default function AddExpenseModal({ onAdd }: { onAdd: (data: any) => void 
               <input
                 name="date"
                 type="date"
-                value={form.date}
+                value={form.date.slice(0,10)}
                 onChange={handleChange}
                 className="w-full border p-2 rounded"
               />

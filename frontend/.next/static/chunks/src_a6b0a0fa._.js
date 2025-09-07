@@ -279,6 +279,9 @@ const authConfig = {
             clientSecret: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].env.GOOGLE_CLIENT_SECRET
         })
     ],
+    session: {
+        strategy: "jwt"
+    },
     pages: {
         signIn: "/auth/signin",
         signOut: "/auth/signout"
@@ -287,18 +290,29 @@ const authConfig = {
     callbacks: {
         async signIn (param) {
             let { user } = param;
-            //send request to backend to crreate user
-            await fetch("".concat(("TURBOPACK compile-time value", "http://localhost:5000"), "/api/users/register"), {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    email: user.email,
-                    name: user.name
-                })
-            });
-            return true;
+            try {
+                console.log('NextAuth signIn - attempting to register user:', user);
+                const response = await fetch("".concat(("TURBOPACK compile-time value", "http://localhost:5000"), "/api/auth/register"), {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        googleId: user.id,
+                        email: user.email,
+                        name: user.name
+                    })
+                });
+                const data = await response.json();
+                console.log('Registration response:', response.status, data);
+                if (!response.ok) {
+                    console.error('Registration failed:', data);
+                }
+                return true;
+            } catch (error) {
+                console.error('Error registering user:', error);
+                return true; // Don't block login
+            }
         },
         async jwt (param) {
             let { token, user } = param;
@@ -306,6 +320,7 @@ const authConfig = {
             console.log("JWT callback with token and user", token, user);
             if (user) {
                 // token.accessToken = user.token;
+                token.googleId = user.id;
                 token.userId = user.id; // add id to the JWT
                 token.email = user.email;
                 token.name = user.name;
@@ -325,10 +340,7 @@ const authConfig = {
             return session;
         }
     },
-    debug: true,
-    session: {
-        strategy: "jwt"
-    }
+    debug: true
 };
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);

@@ -4,22 +4,41 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export const registerUser = async (req: Request, res: Response , next:NextFunction) => {
+export const registerUser = async (req: Request, res: Response) => {
   try {
-    const { email, name } = req.body;
-    if (!email) return res.status(400).json({ error: "Email is required" });
+    console.log('Registration request body:', req.body);
 
-    let user = await prisma.user.findUnique({ where: { email } });
+    const { email, name, googleId } = req.body;
 
-    if (!user) {
-      user = await prisma.user.create({
-        data: { email, name },
-      });
+    if (!email || !googleId) {
+      return res.status(400).json({ error: "Email is required" });
     }
 
-    res.status(201).json({ message: "User registered", user });
-  } catch (error) {
-    next(error);
+    let user = await prisma.user.findUnique({
+      where: { googleId }
+    });
+
+    if (user) {
+      console.log('User already registered:', user);
+      return res.status(200).json(user);
+    }
+
+    user = await prisma.user.create({
+      data: {
+        googleId,
+        email,
+        name: name || null
+      },
+    });
+
+
+    console.log('Created new User:', user);  
+    res.status(201).json(user);
+  
+  }
+  catch (error) {
+    console.error('User registration error:', error);
+    res.status(500).json({ error: 'Failed to register user' });
   }
 
 };
