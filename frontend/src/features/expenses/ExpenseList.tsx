@@ -4,41 +4,35 @@ import React, { useEffect, useState } from "react";
 export default function ExpenseList() {
   const [expenses, setExpenses] = useState<any[]>([]);
 
-  const fetchExpenses = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
+   async function fetchExpenses() {
 
-    const res = await fetch("http://localhost:5000/api/expenses", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-
-    if (res.ok) {
-      const data = await res.json();
-      setExpenses(data);
+      const res = await fetch("/api/expenses");
+      if (res.ok) {
+        const data = await res.json();
+        setExpenses(data);
+      }
     }
-  };
 
   const handleDelete = async (id: string) => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
-
-    const res = await fetch(`http://localhost:5000/api/expenses`, {
+    const res = await fetch(`/api/expenses/${id}`, {
       method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ id }), // backend expects {id}
     });
-
     if (res.ok) {
-      fetchExpenses(); // refresh list after delete
+      fetchExpenses();
     }
   };
 
   useEffect(() => {
+    async function fetchExpenses() {
+
+      const res = await fetch("/api/expenses");
+      if (res.ok) {
+        const data = await res.json();
+        setExpenses(data);
+      }
+    }
     fetchExpenses();
-  }, []);
+  }, [])
 
   return (
     <div className="border rounded-3xl bg-stone-300 p-4">

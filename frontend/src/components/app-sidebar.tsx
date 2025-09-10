@@ -27,8 +27,8 @@ import Link from "next/link"
 // Menu items
 const items = [
   { title: "Home", url: "/dashboard", icon: Home },
-  { title: "Transactions", url: "/dashboard/inbox", icon: Inbox },
-  { title: "Categories", url: "/dashboard/calendar", icon: Calendar },
+  { title: "Transactions", url: "/dashboard/expenses", icon: Inbox },
+  { title: "Categories", url: "/dashboard/categories", icon: Calendar },
   // { title: "Search", url: "/dashboard/search", icon: Search },
   // { title: "Settings", url: "/dashboard/settings", icon: Settings },
 ]
@@ -91,8 +91,8 @@ export function AppSidebar({ session }: SidebarProps) {
                 <DropdownMenuItem>
                   <span>Billing</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <span onClick={() => signOut()}>Sign out</span>
+                <DropdownMenuItem onClick={() => signOut()}>
+                  <span >Sign out</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

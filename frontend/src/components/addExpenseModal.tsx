@@ -3,6 +3,7 @@
 
 import { getSession, useSession } from "next-auth/react"
 import { useState } from "react"
+import { Bounce, ToastContainer, toast } from "react-toastify";
 
 export default function AddExpenseModal({ onAdd }: { onAdd: (data: any) => void }) {
 
@@ -16,18 +17,30 @@ export default function AddExpenseModal({ onAdd }: { onAdd: (data: any) => void 
     category: "expense",
     date: new Date().toISOString().slice(0, 10),
   })
-
+  const notify = () => {
+    toast.success("Expense added successfully", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    })
+  }
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
-    const {name , value} = e.target;
-     setForm({
-    ...form,
-    [name]:
-      name === "amount"
-        ? Number(value) // convert string → number
-        : name === "date"
-        ? new Date(value).toISOString() // convert string → ISO DateTime
-        : value,
-  })
+    const { name, value } = e.target;
+    setForm({
+      ...form,
+      [name]:
+        name === "amount"
+          ? Number(value) // convert string → number
+          : name === "date"
+            ? new Date(value).toISOString() // convert string → ISO DateTime
+            : value,
+    })
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -48,6 +61,7 @@ export default function AddExpenseModal({ onAdd }: { onAdd: (data: any) => void 
     if (res.ok) {
       const newExpense = await res.json();
       onAdd(newExpense);
+      notify();
       setForm({
         title: "",
         amount: 0,
@@ -57,6 +71,7 @@ export default function AddExpenseModal({ onAdd }: { onAdd: (data: any) => void 
       setOpen(false);
     }
     else {
+      toast.error("Network error. Please try again later.");
       const error = await res.json();
       alert("Error creating expense:" + error.error);
     }
@@ -64,6 +79,20 @@ export default function AddExpenseModal({ onAdd }: { onAdd: (data: any) => void 
 
   return (
     <>
+
+      <ToastContainer
+        position="bottom-right"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick={true}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        transition={Bounce}
+      />
       {/* Floating + Button */}
       <button
         onClick={() => setOpen(true)}
@@ -109,7 +138,7 @@ export default function AddExpenseModal({ onAdd }: { onAdd: (data: any) => void 
               <input
                 name="date"
                 type="date"
-                value={form.date.slice(0,10)}
+                value={form.date.slice(0, 10)}
                 onChange={handleChange}
                 className="w-full border p-2 rounded"
               />
