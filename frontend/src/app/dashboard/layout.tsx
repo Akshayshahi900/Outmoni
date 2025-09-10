@@ -22,12 +22,12 @@ if(!session) redirect("/auth/signin");
 
   return (
       <SidebarProvider>
-      <div className="flex h-screen">
+      <div className="flex h-screen w-full">
         {/* Left Sidebar */}
         <AppSidebar session={session} />
 
         {/* Main Area */}
-        <div className="flex flex-col  flex-1">
+        <div className="flex-1 overflow-y-auto bg-gray-50">
           {/* Optional header */}
           {/* <Header session={session} /> */}
 

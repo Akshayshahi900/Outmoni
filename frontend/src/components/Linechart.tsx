@@ -1,72 +1,43 @@
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+"use client"
 
-const data = [
-    {
-        name: 'Page A',
-        uv: 4000,
-        pv: 2400,
-        amt: 2400,
-    },
-    {
-        name: 'Page B',
-        uv: 3000,
-        pv: 1398,
-        amt: 2210,
-    },
-    {
-        name: 'Page C',
-        uv: 2000,
-        pv: 9800,
-        amt: 2290,
-    },
-    {
-        name: 'Page D',
-        uv: 2780,
-        pv: 3908,
-        amt: 2000,
-    },
-    {
-        name: 'Page E',
-        uv: 1890,
-        pv: 4800,
-        amt: 2181,
-    },
-    {
-        name: 'Page F',
-        uv: 2390,
-        pv: 3800,
-        amt: 2500,
-    },
-    {
-        name: 'Page G',
-        uv: 3490,
-        pv: 4300,
-        amt: 2100,
-    },
-];
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
 
-export default function Linechart() {
-    return (
-        <ResponsiveContainer width="100%" height="100%">
-            <LineChart
-                width={500}
-                height={300}
-                data={data}
-                margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-                }}
-            >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
-                <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-            </LineChart>
-        </ResponsiveContainer>
-    );
+export default function Linechart({ data }: { data: any[] }) {
+  // 🔹 Group expenses by date
+  const dailyTotals: { [date: string]: number } = {}
+
+  data.forEach((tx) => {
+    const date = new Date(tx.date).toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+    })
+
+    // expense = negative, income = positive
+    const amount = tx.category === "income" ? tx.amount : -tx.amount
+    dailyTotals[date] = (dailyTotals[date] || 0) + amount
+  })
+
+  // 🔹 Convert into array sorted by date
+  const chartData = Object.keys(dailyTotals).map((date) => ({
+    date,
+    balance: dailyTotals[date],
+  }))
+
+  // 🔹 Sort chronologically (important!)
+  chartData.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+
+  return (
+    <div className="bg-white rounded-xl shadow p-6">
+      <h2 className="text-lg font-semibold mb-4">Cash Flow</h2>
+      <ResponsiveContainer width="100%" height={300}>
+        <LineChart data={chartData}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="date" />
+          <YAxis />
+          <Tooltip />
+          <Line type="monotone" dataKey="balance" stroke="#2563eb" strokeWidth={2} dot={false} />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
+  )
 }
