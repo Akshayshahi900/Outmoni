@@ -24,8 +24,10 @@ const handleGoogleSignIn = () => {
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="flex items-center justify-center mb-4">
-            <DollarSign className="h-8 w-8 text-emerald-600" />
-            <span className="ml-2 text-2xl font-bold text-gray-900">OUTMONI</span>
+            <Link className="flex items-center justify-center" href="/">
+              {/* <DollarSign className="h-8 w-8 text-emerald-600" /> */}
+              <span className="ml-2 text-2xl font-bold text-gray-900">OUTMONI</span>
+            </Link>
           </div>
           <CardTitle>Welcome back</CardTitle>
           <CardDescription>Sign in to your account to continue</CardDescription>

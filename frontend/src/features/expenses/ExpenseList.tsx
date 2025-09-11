@@ -54,14 +54,15 @@ const ExpenseList: React.FC = () => {
     }
   };
 
-  const handleDelete = async (id: string) => {
-    const res = await fetch(`/api/expenses/${id}`, {
-      method: "DELETE",
-    });
+  async function handleDelete(id: string) {
+    const res = await fetch(`/api/expenses/${id}`, { method: "DELETE" })
     if (res.ok) {
-      fetchExpenses();
+      setExpenses((prev) => prev.filter((e) => e.id !== id))
+    } else {
+      alert("Failed to delete expense")
     }
-  };
+  }
+
 
   useEffect(() => {
     fetchExpenses();
@@ -349,12 +350,17 @@ const ExpenseList: React.FC = () => {
                       </td>
                       <td className="px-6 py-4 text-center">
                         <button
-                          onClick={() => handleDelete(expense.id)}
-                          className="text-red-600 hover:text-red-800"
+                          onClick={() => {
+                            if (confirm("Are you sure you want to delete this expense?")) {
+                              handleDelete(expense.id)
+                            }
+                          }}
+                          className="text-red-600 hover:text-red-800 text-sm font-medium"
                         >
-                          ❌
+                          Delete
                         </button>
                       </td>
+
                     </tr>
                   ))
                 )}
