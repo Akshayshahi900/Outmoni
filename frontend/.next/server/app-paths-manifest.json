@@ -1,1 +1,10 @@
-{}
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
+  "/api/expenses/[id]/route": "app/api/expenses/[id]/route.js",
+  "/api/expenses/route": "app/api/expenses/route.js",
+  "/dashboard/categories/page": "app/dashboard/categories/page.js",
+  "/dashboard/expenses/page": "app/dashboard/expenses/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/page": "app/page.js"
+}

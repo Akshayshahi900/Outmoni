@@ -206,6 +206,7 @@
     --color-pink-50: #fdf2f8;
     --color-pink-200: #fccee8;
     --color-pink-700: #c4005c;
+    --color-slate-400: #90a1b9;
     --color-gray-50: #f9fafb;
     --color-gray-100: #f3f4f6;
     --color-gray-200: #e5e7eb;
@@ -241,6 +242,9 @@
     --text-5xl: 3rem;
     --text-5xl--line-height: 1;
     --text-6xl: 3.75rem;
+    --text-6xl--line-height: 1;
+    --text-8xl: 6rem;
+    --text-8xl--line-height: 1;
     --font-weight-normal: 400;
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
@@ -307,6 +311,7 @@
       --color-pink-50: color(display-p3 .983916 .950076 .970581);
       --color-pink-200: color(display-p3 .95913 .815822 .905269);
       --color-pink-700: color(display-p3 .711537 .101006 .358209);
+      --color-slate-400: color(display-p3 .577446 .629622 .716602);
       --color-gray-50: color(display-p3 .977213 .98084 .985102);
       --color-gray-100: color(display-p3 .953567 .956796 .964321);
       --color-gray-200: color(display-p3 .899787 .906171 .92106);
@@ -366,6 +371,7 @@
       --color-pink-50: lab(96.4459% 4.53997 -1.49434);
       --color-pink-200: lab(87.4504% 19.6 -6.46662);
       --color-pink-700: lab(42.1737% 71.8009 7.42233);
+      --color-slate-400: lab(65.5349% -2.25151 -14.5072);
       --color-gray-50: lab(98.2596% -.247031 -.706708);
       --color-gray-100: lab(96.1596% -.0823438 -1.13575);
       --color-gray-200: lab(91.6229% -.159115 -2.26791);
@@ -1945,6 +1951,16 @@
     line-height: var(--tw-leading, var(--text-4xl--line-height));
   }
 
+  .text-6xl {
+    font-size: var(--text-6xl);
+    line-height: var(--tw-leading, var(--text-6xl--line-height));
+  }
+
+  .text-8xl {
+    font-size: var(--text-8xl);
+    line-height: var(--tw-leading, var(--text-8xl--line-height));
+  }
+
   .text-base {
     font-size: var(--text-base);
     line-height: var(--tw-leading, var(--text-base--line-height));
@@ -2141,6 +2157,10 @@
     .text-sidebar-foreground\/70 {
       color: color-mix(in oklab, var(--sidebar-foreground) 70%, transparent);
     }
+  }
+
+  .text-slate-400 {
+    color: var(--color-slate-400);
   }
 
   .text-white {
