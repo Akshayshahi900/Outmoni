@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 export const registerUser = async (req: Request, res: Response) => {
   try {
-    console.log('Registration request body:', req.body);
+    // console.log('Registration request body:', req.body);
 
     const { email, name, googleId } = req.body;
 
@@ -19,7 +19,7 @@ export const registerUser = async (req: Request, res: Response) => {
     });
 
     if (user) {
-      console.log('User already registered:', user);
+      // console.log('User already registered:', user);
       return res.status(200).json(user);
     }
 
@@ -32,7 +32,7 @@ export const registerUser = async (req: Request, res: Response) => {
     });
 
 
-    console.log('Created new User:', user);  
+    // console.log('Created new User:', user);  
     res.status(201).json(user);
   
   }

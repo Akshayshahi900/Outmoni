@@ -28,7 +28,7 @@ export const verifyAuth = async (req: Request, res: Response, next: NextFunction
 
     try {
         const decoded = jwt.verify(token, process.env.NEXTAUTH_SECRET!) as any;
-        console.log("Decoded JWT payload:", decoded);
+        // console.log("Decoded JWT payload:", decoded);
 
         // Find the user in database using Google ID to get MongoDB ObjectID
         const user = await prisma.user.findUnique({

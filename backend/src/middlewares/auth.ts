@@ -15,11 +15,11 @@ export const authMiddleware = (req:Request , res:Response , next:NextFunction)=>
         return res.status(401).json({error:"invalid token format"});
     }
 
-    const decoded = jwt.verify(token , process.env.JWT_SECRET!) as User & {id:string};
+    const decoded = jwt.verify(token , process.env.NEXTAUTH_SECRET!) as User & {id:string};
 
     //attach the user to the request object
     // req.user = decoded;
-    console.log("Authenticated user:", req.user);
+    // console.log("Authenticated user:", req.user);
     next();
 
   }catch(error){

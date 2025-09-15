@@ -24,7 +24,7 @@ export const authConfig: NextAuthOptions = {
 
 
       try {
-        console.log('NextAuth signIn - attempting to register user:', user);
+        // console.log('NextAuth signIn - attempting to register user:', user);
 
         const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/register`, {
           method: "POST",
@@ -37,7 +37,7 @@ export const authConfig: NextAuthOptions = {
         });
 
         const data = await response.json();
-        console.log('Registration response:', response.status, data);
+        // console.log('Registration response:', response.status, data);
 
         if (!response.ok) {
           console.error('Registration failed:', data);
@@ -51,7 +51,7 @@ export const authConfig: NextAuthOptions = {
     },
     async jwt({ token, user }) {
       //when user logs in for the first time 
-      console.log("JWT callback with token and user", token, user);
+      // console.log("JWT callback with token and user", token, user);
 
       if (user) {
 
@@ -65,7 +65,7 @@ export const authConfig: NextAuthOptions = {
     },
     async session({ session, token }: any) {
       // add id to the session object for NEXT.js usage
-      console.log("Session callback", session, token);
+      // console.log("Session callback", session, token);
       if (session.user) {
         session.userId = token.userId as string;
         session.user.email = token.email as string;
