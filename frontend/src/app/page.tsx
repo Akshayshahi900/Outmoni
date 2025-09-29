@@ -20,7 +20,7 @@ import { redirect } from "next/navigation"
 import { getServerSession } from "next-auth"
 import { authConfig } from "@/auth.config"
 
-export default  async function Home() {
+export default async function Home() {
   const session = await getServerSession(authConfig);
   return (
     <div className="flex flex-col min-h-screen bg-white">
@@ -52,17 +52,11 @@ export default  async function Home() {
           </div>
         ) : (
           <div className="ml-6 flex gap-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={redirect("/auth/signin")}
-            >
-              Sign In
-            </Button>
-
-            <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700" onClick={redirect("/auth/signin")}>
-              Get Started
-            </Button>
+            <Link href="/auth/signin">
+              <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700">
+                Get Started
+              </Button>
+            </Link>
           </div>
         )}
       </header>
@@ -86,11 +80,13 @@ export default  async function Home() {
                     insights and beautiful visualizations.
                   </p>
                 </div>
-                <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                  <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700">
-                    Start Free Trial
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
+                <div className="flex flex-col gap-2 min-[400px]:flex-row" >
+                  <Link href="/auth/signin">
+                    <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700" >
+                      Start Free Trial
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
                   <Button variant="outline" size="lg">
                     Watch Demo
                   </Button>

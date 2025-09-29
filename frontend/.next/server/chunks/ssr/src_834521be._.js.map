@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 5, "column": 0}, "map": {"version":3,"sources":["file:///home/akshay/Code/Full%20stack/Finance/frontend/src/lib/auth.ts"],"sourcesContent":["\"use client\";\n\nexport {\n  useSession,\n  signIn,\n  signOut,\n} from \"next-auth/react\";\n"],"names":[],"mappings":";AAEA;AAFA","debugId":null}},
-    {"offset": {"line": 20, "column": 0}, "map": {"version":3,"sources":["file:///home/akshay/Code/Full%20stack/Finance/frontend/src/components/AuthButton.tsx"],"sourcesContent":["'use client';\n\nimport { useSession, signIn, signOut } from \"@/lib/auth\";\n\nexport default function AuthButton() {\n  const { data: session, status } = useSession();\n\n  if (status === \"loading\") return <p>Loading...</p>;\n\n  if (session) {\n    return (\n      <div>\n        <p>Welcome, {session.user?.name}!</p>\n        <button onClick={() => signOut()}>Sign Out</button>\n      </div>\n    );\n  }\n\n  return <button onClick={() => signIn(\"google\")}>Sign in with Google</button>;\n}\n"],"names":[],"mappings":";;;;AAEA;AAAA;AAFA;;;AAIe,SAAS;IACtB,MAAM,EAAE,MAAM,OAAO,EAAE,MAAM,EAAE,GAAG,CAAA,GAAA,8IAAA,CAAA,aAAU,AAAD;IAE3C,IAAI,WAAW,WAAW,qBAAO,8OAAC;kBAAE;;;;;;IAEpC,IAAI,SAAS;QACX,qBACE,8OAAC;;8BACC,8OAAC;;wBAAE;wBAAU,QAAQ,IAAI,EAAE;wBAAK;;;;;;;8BAChC,8OAAC;oBAAO,SAAS,IAAM,CAAA,GAAA,8IAAA,CAAA,UAAO,AAAD;8BAAK;;;;;;;;;;;;IAGxC;IAEA,qBAAO,8OAAC;QAAO,SAAS,IAAM,CAAA,GAAA,8IAAA,CAAA,SAAM,AAAD,EAAE;kBAAW;;;;;;AAClD","debugId":null}}]
-}
