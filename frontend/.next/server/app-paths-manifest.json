@@ -1,13 +1,5 @@
 {
-  "/api/expenses/[id]/route": "app/api/expenses/[id]/route.js",
-  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
-  "/api/expenses/route": "app/api/expenses/route.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
   "/_not-found/page": "app/_not-found/page.js",
-  "/auth/signin/page": "app/auth/signin/page.js",
-  "/page": "app/page.js",
-  "/auth/signup/page": "app/auth/signup/page.js",
-  "/dashboard/expenses/page": "app/dashboard/expenses/page.js",
-  "/dashboard/page": "app/dashboard/page.js",
-  "/dashboard/categories/page": "app/dashboard/categories/page.js"
+  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
+  "/page": "app/page.js"
 }
