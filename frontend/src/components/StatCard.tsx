@@ -1,44 +1,67 @@
 import React from "react"
+import { TrendingUp } from "lucide-react"
 
 interface StatCardProps {
   title: string
-  value: string | number
-  change?: number // optional % change
-  prefix?: string // optional (e.g. $, ₹, etc.)
-  icon?: React.ReactNode // optional icon for InfoCard-style
+  value: number | string
+  prefix?: string
+  suffix?: string
+  icon?: React.ReactNode
+  change?: number
 }
 
-export default function StatCard({ title, value, change, prefix, icon }: StatCardProps) {
-  const isPositive = change !== undefined && change >= 0
-
-  // Format numbers with commas
-  const formattedValue =
-    typeof value === "number"
-      ? `${prefix ?? ""}${value.toLocaleString()}`
-      : `${prefix ?? ""}${value}`
+export default function StatCard({
+  title,
+  value,
+  prefix = "",
+  suffix = "",
+  icon,
+  change,
+}: StatCardProps) {
+  const isPositive = change !== undefined && change > 0
+  const isNegative = change !== undefined && change < 0
 
   return (
-    <div className="bg-white rounded-xl shadow p-5 flex flex-col gap-2 transition hover:shadow-md">
-      {/* Title */}
-      <div className="flex items-center gap-2 text-sm text-gray-500 font-medium">
-        {icon && <span className="text-gray-400">{icon}</span>}
-        <span>{title}</span>
+    <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-4 sm:p-6 hover:shadow-md transition-shadow">
+      <div className="flex items-center justify-between mb-3">
+        <span className="text-sm font-medium text-gray-600">{title}</span>
+        <div className=" bg-blue-50 rounded-lg text-blue-600">{icon}</div>
       </div>
-
-      {/* Value + Change */}
-      <div className="flex items-center gap-2">
-        <span className="text-2xl font-bold text-gray-900">{formattedValue}</span>
-
+      <div className="space-y-1">
+        <p className="text-2xl sm:text-3xl font-bold text-gray-900">
+          {prefix}
+          {typeof value === "number"
+            ? value.toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })
+            : value}
+          {suffix}
+        </p>
         {change !== undefined && (
-          <span
-            className={`text-sm px-2 py-0.5 rounded-full font-medium ${
-              isPositive
-                ? "bg-green-100 text-green-700"
-                : "bg-red-100 text-red-700"
-            }`}
-          >
-            {isPositive ? "↑" : "↓"} {Math.abs(change)}%
-          </span>
+          <div className="flex items-center gap-1">
+            {isPositive && (
+              <>
+                <TrendingUp className="w-3 h-3 text-green-600" />
+                <span className="text-xs font-medium text-green-600">
+                  +{change.toFixed(1)}%
+                </span>
+              </>
+            )}
+            {isNegative && (
+              <>
+                <TrendingUp className="w-3 h-3 text-red-600 rotate-180" />
+                <span className="text-xs font-medium text-red-600">
+                  {change.toFixed(1)}%
+                </span>
+              </>
+            )}
+            {!isPositive && !isNegative && (
+              <span className="text-xs font-medium text-gray-500">
+                No change
+              </span>
+            )}
+          </div>
         )}
       </div>
     </div>

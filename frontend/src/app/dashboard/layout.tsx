@@ -31,7 +31,7 @@ if(!session) redirect("/auth/signin");
           {/* Optional header */}
           {/* <Header session={session} /> */}
 
-          <main className="p-6  overflow-y-auto">
+          <main className="p-6 overflow-y-auto sm:p-2">
             {/* Sidebar toggle button */}
             <SidebarTrigger />
 
