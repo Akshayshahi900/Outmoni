@@ -79,7 +79,7 @@ export default function DashboardPage() {
             Track your income and expenses in real-time
           </p>
         </div>
-        <div className="flex items-center gap-2 sm:gap-3">
+        {/* <div className="flex items-center gap-2 sm:gap-3">
           <button className="flex items-center gap-2 px-3 sm:px-4 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
             <Calendar className="w-4 h-4" />
             <span className="hidden sm:inline">This Month</span>
@@ -88,7 +88,7 @@ export default function DashboardPage() {
             <Download className="w-4 h-4" />
             <span className="hidden sm:inline">Export</span>
           </button>
-        </div>
+        </div> */}
       </div>
 
       {/* Main KPI Cards */}

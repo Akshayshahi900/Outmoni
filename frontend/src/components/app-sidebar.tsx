@@ -28,7 +28,6 @@ import Link from "next/link"
 const items = [
   { title: "Home", url: "/dashboard", icon: Home },
   { title: "Transactions", url: "/dashboard/expenses", icon: Inbox },
-  { title: "Categories", url: "/dashboard/categories", icon: Calendar },
   // { title: "Search", url: "/dashboard/search", icon: Search },
   // { title: "Settings", url: "/dashboard/settings", icon: Settings },
 ]
@@ -85,12 +84,12 @@ export function AppSidebar({ session }: SidebarProps) {
                 side="top"
                 className="w-[--radix-popper-anchor-width]"
               >
-                <DropdownMenuItem>
+                {/* <DropdownMenuItem>
                   <span>Account</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <span>Billing</span>
-                </DropdownMenuItem>
+                </DropdownMenuItem> */}
                 <DropdownMenuItem onClick={() => signOut()}>
                   <span >Sign out</span>
                 </DropdownMenuItem>

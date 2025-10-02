@@ -34,7 +34,7 @@ export default async function Home() {
           <Link className="text-sm font-medium hover:text-emerald-600 transition-colors" href="/dashboard">
             Dashboard
           </Link>
-          <Link className="text-sm font-medium hover:text-emerald-600 transition-colors" href="#pricing">
+          {/* <Link className="text-sm font-medium hover:text-emerald-600 transition-colors" href="#pricing">
             Pricing
           </Link>
           <Link className="text-sm font-medium hover:text-emerald-600 transition-colors" href="#about">
@@ -42,7 +42,7 @@ export default async function Home() {
           </Link>
           <Link className="text-sm font-medium hover:text-emerald-600 transition-colors" href="#contact">
             Contact
-          </Link>
+          </Link> */}
         </nav>
         {session ? (
           <div className="ml-6 flex gap-2">
@@ -83,27 +83,27 @@ export default async function Home() {
                 <div className="flex flex-col gap-2 min-[400px]:flex-row" >
                   <Link href="/auth/signin">
                     <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700" >
-                      Start Free Trial
+                      Start for Free
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
                   </Link>
-                  <Button variant="outline" size="lg">
+                  {/* <Button variant="outline" size="lg">
                     Watch Demo
-                  </Button>
+                  </Button> */}
                 </div>
                 <div className="flex items-center gap-4 text-sm text-gray-600">
                   <div className="flex items-center gap-1">
                     <Check className="h-4 w-4 text-emerald-600" />
-                    <span>14-day free trial</span>
+                    <span>Free trial</span>
                   </div>
                   <div className="flex items-center gap-1">
                     <Check className="h-4 w-4 text-emerald-600" />
                     <span>No credit card required</span>
                   </div>
-                  <div className="flex items-center gap-1">
+                  {/* <div className="flex items-center gap-1">
                     <Check className="h-4 w-4 text-emerald-600" />
                     <span>Cancel anytime</span>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className="flex items-center justify-center">
@@ -113,8 +113,8 @@ export default async function Home() {
                     alt="OUTMONI Dashboard"
                     className="relative rounded-lg shadow-2xl"
                     height="400"
-                    src="/placeholder.svg?height=400&width=600"
-                    width="600"
+                    src="/home.png"
+                    width="500"
                   />
                 </div>
               </div>
@@ -196,7 +196,7 @@ export default async function Home() {
         </section>
 
         {/* Stats Section */}
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50">
+        {/* <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50">
           <div className="container px-4 md:px-6 mx-auto">
             <div className="grid gap-6 lg:grid-cols-3 lg:gap-12">
               <div className="flex flex-col items-center space-y-4 text-center">
@@ -213,10 +213,10 @@ export default async function Home() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Pricing Section */}
-        <section id="pricing" className="w-full py-12 md:py-24 lg:py-32">
+        {/* <section id="pricing" className="w-full py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6 mx-auto">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
@@ -332,10 +332,10 @@ export default async function Home() {
               </Card>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Testimonials */}
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50">
+        {/* <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50">
           <div className="container px-4 md:px-6 mx-auto">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
@@ -416,7 +416,7 @@ export default async function Home() {
               </Card>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* CTA Section */}
         <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-r from-emerald-600 to-teal-600">
@@ -431,17 +431,18 @@ export default async function Home() {
                 </p>
               </div>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Button size="lg" className="bg-white text-emerald-600 hover:bg-gray-100">
-                  Start Your Free Trial
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-                <Button
+                <Link href="/auth/signin" >
+                  <Button size="lg" className="bg-white text-emerald-600 hover:bg-gray-100">
+                    Start Now
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button></Link>
+                {/* <Button
                   variant="outline"
                   size="lg"
                   className="border-white text-white hover:bg-white hover:text-emerald-600 bg-transparent"
                 >
                   Schedule Demo
-                </Button>
+                </Button> */}
               </div>
             </div>
           </div>
@@ -454,7 +455,7 @@ export default async function Home() {
           <DollarSign className="h-6 w-6 text-emerald-600" />
           <span className="text-sm font-semibold">OUTMONI</span>
         </div>
-        <p className="text-xs text-gray-600 sm:ml-auto">© 2024 OUTMONI. All rights reserved.</p>
+        <p className="text-xs text-gray-600 sm:ml-auto">Made by Akshay Shahi.</p>
         <nav className="sm:ml-6 flex gap-4 sm:gap-6">
           <Link className="text-xs hover:underline underline-offset-4 text-gray-600" href="#">
             Terms of Service
