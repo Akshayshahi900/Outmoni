@@ -76,7 +76,7 @@ export default function DashboardPage() {
             Financial Dashboard
           </h1>
           <p className="text-sm sm:text-base text-gray-600 mt-1">
-            Track your income and expenses in real-time
+            Track your Expenses in real-time
           </p>
         </div>
         {/* <div className="flex items-center gap-2 sm:gap-3">
