@@ -20,17 +20,17 @@ const handleGoogleSignIn = () => {
 
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-50 to-teal-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-app px-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="flex items-center justify-center mb-4">
             <Link className="flex items-center justify-center" href="/">
               {/* <DollarSign className="h-8 w-8 text-emerald-600" /> */}
-              <span className="ml-2 text-2xl font-bold text-gray-900">OUTMONI</span>
+              <span className="ml-2 text-app text-lg font-bold">OUTMONI</span>
             </Link>
           </div>
-          <CardTitle>Welcome back</CardTitle>
-          <CardDescription>Sign in to your account to continue</CardDescription>
+          <CardTitle className="text-app text-sm">Welcome back</CardTitle>
+          <CardDescription className="font-semibold">Sign in to your account to continue</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
 
@@ -89,7 +89,7 @@ const handleGoogleSignIn = () => {
           </form> */}
 
           <div className="text-center text-sm">
-            <span className="text-gray-600">{"Don't have an account? "}</span>
+            <span className="font-semibold text-background">{"Don't have an account? "}</span>
             <Link href="/auth/signup" className="text-emerald-600 hover:underline">
               Sign up
             </Link>

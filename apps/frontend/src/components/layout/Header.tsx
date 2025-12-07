@@ -9,9 +9,10 @@ interface HeaderProps {
   }
 }
 
+
 export function Header({ session }: HeaderProps) {
   return (
-    <div className="bg-white shadow-sm p-4 mb-6">
+    <div className="bg-card shadow-sm p-4 mb-6 border border-border">
       <div className="flex items-center gap-3">
         {session.user?.image && (
           <img
@@ -20,13 +21,14 @@ export function Header({ session }: HeaderProps) {
             className="h-10 w-10 rounded-full"
           />
         )}
+
         {/* <div>
-          <h2 className="text-xl font-semibold">
+          <h2 className="text-xl font-semibold text-app">
             Welcome, {session.user?.name}
           </h2>
-          <p className="text-gray-600">{session.user?.email}</p>
+          <p className="text-sub">{session.user?.email}</p>
         </div> */}
       </div>
     </div>
-  )
+  );
 }

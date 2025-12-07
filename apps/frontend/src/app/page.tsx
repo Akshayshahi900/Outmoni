@@ -1,473 +1,374 @@
-
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardHeader, CardDescription, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import {
   ArrowRight,
   BarChart3,
   TrendingUp,
   Check,
-  Star,
   DollarSign,
   PieChart,
   Target,
   Bell,
   FolderSyncIcon as Sync,
+  Sparkles,
+  Shield,
+  Zap,
 } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import { redirect } from "next/navigation"
 import { getServerSession } from "next-auth"
 import { authConfig } from "@/auth.config"
 
 export default async function Home() {
-  const session = await getServerSession(authConfig);
+  const session = await getServerSession(authConfig)
+
   return (
-    <div className="flex flex-col min-h-screen bg-white">
-      {/* Header */}
-      <header className="px-4 lg:px-6 h-16 flex items-center border-b border-gray-100">
-        <Link className="flex items-center justify-center" href="/">
-          <DollarSign className="h-8 w-8 text-emerald-600" />
-          <span className="ml-2 text-2xl font-bold text-gray-900">OUTMONI</span>
+    <div className="flex flex-col min-h-screen bg-gradient-to-b from-slate-50 to-white">
+
+      {/* HEADER */}
+      <header className="sticky top-0 z-50 px-6 lg:px-12 h-16 flex items-center border-b border-slate-200/60 bg-white/80 backdrop-blur-xl shadow-sm">
+        <Link className="flex items-center gap-2 hover:opacity-80 transition-opacity group" href="/">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow">
+            <DollarSign className="h-6 w-6 text-white" />
+          </div>
+          <span className="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+            OUTMONI
+          </span>
         </Link>
-        <nav className="ml-auto flex gap-4 sm:gap-6">
-          <Link className="text-sm font-medium hover:text-emerald-600 transition-colors" href="/dashboard">
-            Dashboard
+
+        <nav className="ml-auto flex items-center gap-8">
+          <Link className="text-sm font-medium text-slate-600 hover:text-emerald-600 transition-colors" href="#features">
+            Features
           </Link>
-          {/* <Link className="text-sm font-medium hover:text-emerald-600 transition-colors" href="#pricing">
-            Pricing
-          </Link>
-          <Link className="text-sm font-medium hover:text-emerald-600 transition-colors" href="#about">
+          <Link className="text-sm font-medium text-slate-600 hover:text-emerald-600 transition-colors" href="#about">
             About
           </Link>
-          <Link className="text-sm font-medium hover:text-emerald-600 transition-colors" href="#contact">
-            Contact
-          </Link> */}
+          <Link className="text-sm font-medium text-slate-600 hover:text-emerald-600 transition-colors" href="/dashboard">
+            Dashboard
+          </Link>
         </nav>
+
         {session ? (
-          <div className="ml-6 flex gap-2">
-            <p className="text-md p-2 bg-green-300  border-2 rounded-3xl font-medium text-gray-900">
-              Welcome Back!
+          <div className="ml-6 flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 rounded-full">
+            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+            <p className="text-sm text-emerald-900 font-semibold">
+              Welcome Back 👋
             </p>
           </div>
         ) : (
-          <div className="ml-6 flex gap-2">
+          <div className="ml-6">
             <Link href="/auth/signin">
-              <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700">
+              <Button
+                size="sm"
+                className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-full px-6"
+              >
                 Get Started
+                <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
           </div>
         )}
       </header>
 
+      {/* MAIN */}
       <main className="flex-1">
-        {/* Hero Section */}
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-br from-emerald-50 to-teal-50">
-          <div className="container px-4 md:px-6 mx-auto">
-            <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
-              <div className="flex flex-col justify-center space-y-4">
-                <div className="space-y-2">
-                  <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100">
-                    {"🚀 New: AI-Powered Insights Available"}
-                  </Badge>
-                  <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none text-gray-900">
-                    Take Control of Your
-                    <span className="text-emerald-600"> Financial Future</span>
-                  </h1>
-                  <p className="max-w-[600px] text-gray-600 md:text-xl">
-                    OUTMONI helps you track expenses, manage budgets, and achieve your financial goals with intelligent
-                    insights and beautiful visualizations.
-                  </p>
-                </div>
-                <div className="flex flex-col gap-2 min-[400px]:flex-row" >
+
+        {/* HERO */}
+        <section className="relative py-24 lg:py-40 overflow-hidden">
+          {/* Enhanced gradient background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-teal-50/50 to-slate-50"></div>
+          
+          {/* Animated glow accents */}
+          <div className="absolute top-20 left-10 w-72 h-72 bg-emerald-400/20 blur-3xl rounded-full animate-pulse"></div>
+          <div className="absolute bottom-20 right-10 w-[450px] h-[450px] bg-teal-400/20 blur-[110px] rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-300/10 blur-[120px] rounded-full"></div>
+
+          <div className="container relative mx-auto px-6 md:px-12">
+            <div className="grid lg:grid-cols-[1fr_500px] gap-16 items-center">
+
+              {/* LEFT */}
+              <div className="space-y-8 animate-in fade-in slide-in-from-left-8 duration-1000">
+                <Badge className="w-fit bg-gradient-to-r from-emerald-500 to-teal-500 text-white border-0 shadow-lg animate-in fade-in slide-in-from-left-4 duration-700 px-4 py-1.5">
+                  <Sparkles className="w-3 h-3 mr-1.5 inline" />
+                  AI-Powered Insights Just Launched
+                </Badge>
+
+                <h1 className="text-5xl md:text-7xl font-extrabold leading-[1.1] tracking-tight text-slate-900 animate-in fade-in slide-in-from-left-6 duration-800">
+                  Take Control of Your{" "}
+                  <span className="block bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 bg-clip-text text-transparent animate-gradient">
+                    Financial Future
+                  </span>
+                </h1>
+
+                <p className="text-xl text-slate-600 max-w-xl leading-relaxed animate-in fade-in slide-in-from-left-8 duration-900">
+                  Track expenses, plan budgets, and visualize your financial life with a clean, powerful dashboard built for the modern age.
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-4 animate-in fade-in slide-in-from-left-10 duration-1000">
                   <Link href="/auth/signin">
-                    <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700" >
-                      Start for Free
-                      <ArrowRight className="ml-2 h-4 w-4" />
+                    <Button
+                      size="lg"
+                      className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-10 py-7 text-lg rounded-2xl shadow-2xl hover:shadow-emerald-500/50 transition-all duration-300 hover:-translate-y-1 group"
+                    >
+                      Start For Free 
+                      <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </Link>
-                  {/* <Button variant="outline" size="lg">
+                  
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-2 border-slate-200 hover:border-emerald-600 text-slate-700 hover:text-emerald-600 px-8 py-7 text-lg rounded-2xl hover:bg-emerald-50/50 transition-all duration-300"
+                  >
                     Watch Demo
-                  </Button> */}
+                  </Button>
                 </div>
-                <div className="flex items-center gap-4 text-sm text-gray-600">
-                  <div className="flex items-center gap-1">
-                    <Check className="h-4 w-4 text-emerald-600" />
-                    <span>Free trial</span>
+
+                <div className="flex items-center gap-8 text-slate-600 text-sm animate-in fade-in slide-in-from-left-12 duration-1100">
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                      <Check className="h-3 w-3 text-emerald-600" />
+                    </div>
+                    <span className="font-medium">Free Trial</span>
                   </div>
-                  <div className="flex items-center gap-1">
-                    <Check className="h-4 w-4 text-emerald-600" />
-                    <span>No credit card required</span>
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                      <Check className="h-3 w-3 text-emerald-600" />
+                    </div>
+                    <span className="font-medium">No Card Required</span>
                   </div>
-                  {/* <div className="flex items-center gap-1">
-                    <Check className="h-4 w-4 text-emerald-600" />
-                    <span>Cancel anytime</span>
-                  </div> */}
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                      <Shield className="h-3 w-3 text-emerald-600" />
+                    </div>
+                    <span className="font-medium">Bank-Level Security</span>
+                  </div>
                 </div>
               </div>
-              <div className="flex items-center justify-center">
+
+              {/* RIGHT IMAGE */}
+              <div className="relative group animate-in fade-in slide-in-from-right-8 duration-1000">
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-3xl blur-3xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
+                
                 <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-lg blur-3xl opacity-30"></div>
                   <Image
-                    alt="OUTMONI Dashboard"
-                    className="relative rounded-lg shadow-2xl"
-                    height="400"
                     src="/home.png"
-                    width="500"
+                    width={600}
+                    height={500}
+                    alt="Dashboard preview"
+                    className="relative rounded-2xl shadow-2xl ring-1 ring-slate-200/50 group-hover:scale-[1.02] transition-transform duration-500"
                   />
+                  
+                  {/* Floating elements */}
+                  <div className="absolute -top-6 -right-6 bg-white rounded-2xl shadow-xl p-4 animate-float">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center">
+                        <TrendingUp className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <p className="text-xs text-slate-500">Monthly Savings</p>
+                        <p className="text-lg font-bold text-emerald-600">+$2,450</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-4 animate-float" style={{ animationDelay: '1s' }}>
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+                        <Zap className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <p className="text-xs text-slate-500">Smart Alerts</p>
+                        <p className="text-lg font-bold text-slate-900">Active</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
+
             </div>
           </div>
         </section>
 
-        {/* Features Section */}
-        <section id="features" className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6 mx-auto">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-gray-900">
-                  Everything you need to manage your money
-                </h2>
-                <p className="max-w-[900px] text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  From expense tracking to investment monitoring, OUTMONI provides all the tools you need in one
-                  beautiful, easy-to-use platform.
-                </p>
-              </div>
-            </div>
-            <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-3 lg:gap-12">
-              <Card className="border-gray-200 hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <PieChart className="h-10 w-10 text-emerald-600" />
-                  <CardTitle>Smart Expense Tracking</CardTitle>
-                  <CardDescription>
-                    Automatically categorize and track your expenses with AI-powered transaction analysis.
-                  </CardDescription>
-                </CardHeader>
-              </Card>
-              <Card className="border-gray-200 hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <Target className="h-10 w-10 text-emerald-600" />
-                  <CardTitle>Budget Management</CardTitle>
-                  <CardDescription>
-                    Set realistic budgets and get real-time alerts when you're approaching your limits.
-                  </CardDescription>
-                </CardHeader>
-              </Card>
-              <Card className="border-gray-200 hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <TrendingUp className="h-10 w-10 text-emerald-600" />
-                  <CardTitle>Investment Tracking</CardTitle>
-                  <CardDescription>
-                    Monitor your portfolio performance and get insights on your investment strategy.
-                  </CardDescription>
-                </CardHeader>
-              </Card>
-              <Card className="border-gray-200 hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <Bell className="h-10 w-10 text-emerald-600" />
-                  <CardTitle>Smart Notifications</CardTitle>
-                  <CardDescription>
-                    Get timely alerts about bill due dates, unusual spending, and savings opportunities.
-                  </CardDescription>
-                </CardHeader>
-              </Card>
-              <Card className="border-gray-200 hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <Sync className="h-10 w-10 text-emerald-600" />
-                  <CardTitle>Bank Sync</CardTitle>
-                  <CardDescription>
-                    Securely connect all your accounts and credit cards for automatic transaction import.
-                  </CardDescription>
-                </CardHeader>
-              </Card>
-              <Card className="border-gray-200 hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <BarChart3 className="h-10 w-10 text-emerald-600" />
-                  <CardTitle>Advanced Analytics</CardTitle>
-                  <CardDescription>
-                    Visualize your financial data with beautiful charts and detailed spending reports.
-                  </CardDescription>
-                </CardHeader>
-              </Card>
-            </div>
-          </div>
-        </section>
+        {/* FEATURES */}
+        <section id="features" className="py-32 bg-white relative overflow-hidden">
+          {/* Decorative elements */}
+          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>
+          
+          <div className="container mx-auto px-6 md:px-12">
 
-        {/* Stats Section */}
-        {/* <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50">
-          <div className="container px-4 md:px-6 mx-auto">
-            <div className="grid gap-6 lg:grid-cols-3 lg:gap-12">
-              <div className="flex flex-col items-center space-y-4 text-center">
-                <div className="text-4xl font-bold text-emerald-600">50K+</div>
-                <div className="text-gray-600">Active Users</div>
-              </div>
-              <div className="flex flex-col items-center space-y-4 text-center">
-                <div className="text-4xl font-bold text-emerald-600">$2.5B+</div>
-                <div className="text-gray-600">Money Tracked</div>
-              </div>
-              <div className="flex flex-col items-center space-y-4 text-center">
-                <div className="text-4xl font-bold text-emerald-600">99.9%</div>
-                <div className="text-gray-600">Uptime</div>
-              </div>
+            <div className="text-center space-y-6 mb-20">
+              <Badge className="bg-emerald-100 text-emerald-700 border-emerald-200 px-4 py-1.5">
+                Features
+              </Badge>
+              <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-slate-900">
+                Powerful Tools To{" "}
+                <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                  Manage Your Money
+                </span>
+              </h2>
+              <p className="text-slate-600 max-w-2xl mx-auto text-lg leading-relaxed">
+                Simplify your financial life with clean visualizations and smart automation that works for you.
+              </p>
             </div>
-          </div>
-        </section> */}
 
-        {/* Pricing Section */}
-        {/* <section id="pricing" className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6 mx-auto">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-gray-900">
-                  Simple, transparent pricing
-                </h2>
-                <p className="max-w-[900px] text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Choose the plan that works best for you. All plans include our core features with a 14-day free trial.
-                </p>
-              </div>
-            </div>
-            <div className="grid gap-6 lg:grid-cols-3 lg:gap-8 mx-auto max-w-5xl py-12">
-              <Card className="border-gray-200">
-                <CardHeader>
-                  <CardTitle>Starter</CardTitle>
-                  <CardDescription>Perfect for individuals getting started</CardDescription>
-                  <div className="text-4xl font-bold">
-                    $9<span className="text-lg font-normal text-gray-600">/month</span>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <ul className="space-y-2">
-                    <li className="flex items-center gap-2">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                      <span className="text-sm">Up to 3 bank accounts</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                      <span className="text-sm">Basic expense tracking</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                      <span className="text-sm">Budget management</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                      <span className="text-sm">Mobile app access</span>
-                    </li>
-                  </ul>
-                  <Button className="w-full bg-transparent" variant="outline">
-                    Start Free Trial
-                  </Button>
-                </CardContent>
-              </Card>
-              <Card className="border-emerald-200 relative">
-                <Badge className="absolute -top-2 left-1/2 transform -translate-x-1/2 bg-emerald-600">
-                  Most Popular
-                </Badge>
-                <CardHeader>
-                  <CardTitle>Professional</CardTitle>
-                  <CardDescription>For serious money managers</CardDescription>
-                  <div className="text-4xl font-bold">
-                    $19<span className="text-lg font-normal text-gray-600">/month</span>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <ul className="space-y-2">
-                    <li className="flex items-center gap-2">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                      <span className="text-sm">Unlimited bank accounts</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                      <span className="text-sm">AI-powered insights</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                      <span className="text-sm">Investment tracking</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                      <span className="text-sm">Advanced analytics</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                      <span className="text-sm">Priority support</span>
-                    </li>
-                  </ul>
-                  <Button className="w-full bg-emerald-600 hover:bg-emerald-700">Start Free Trial</Button>
-                </CardContent>
-              </Card>
-              <Card className="border-gray-200">
-                <CardHeader>
-                  <CardTitle>Enterprise</CardTitle>
-                  <CardDescription>For teams and businesses</CardDescription>
-                  <div className="text-4xl font-bold">
-                    $49<span className="text-lg font-normal text-gray-600">/month</span>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <ul className="space-y-2">
-                    <li className="flex items-center gap-2">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                      <span className="text-sm">Everything in Professional</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                      <span className="text-sm">Team collaboration</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                      <span className="text-sm">Custom integrations</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                      <span className="text-sm">Dedicated support</span>
-                    </li>
-                  </ul>
-                  <Button className="w-full bg-transparent" variant="outline">
-                    Contact Sales
-                  </Button>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </section> */}
-
-        {/* Testimonials */}
-        {/* <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50">
-          <div className="container px-4 md:px-6 mx-auto">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-gray-900">
-                  Loved by thousands of users
-                </h2>
-                <p className="max-w-[900px] text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  See what our customers have to say about OUTMONI
-                </p>
-              </div>
-            </div>
-            <div className="grid gap-6 lg:grid-cols-3 lg:gap-8 mx-auto max-w-5xl py-12">
-              <Card className="border-gray-200">
-                <CardContent className="pt-6">
-                  <div className="flex items-center gap-1 mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                    ))}
-                  </div>
-                  <p className="text-gray-600 mb-4">
-                    "OUTMONI completely transformed how I manage my finances. The AI insights helped me save $500 last
-                    month alone!"
-                  </p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
-                      <span className="text-emerald-600 font-semibold">SJ</span>
-                    </div>
-                    <div>
-                      <div className="font-semibold">Sarah Johnson</div>
-                      <div className="text-sm text-gray-600">Marketing Manager</div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card className="border-gray-200">
-                <CardContent className="pt-6">
-                  <div className="flex items-center gap-1 mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                    ))}
-                  </div>
-                  <p className="text-gray-600 mb-4">
-                    "The investment tracking feature is incredible. I can see all my portfolios in one place with
-                    real-time updates."
-                  </p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
-                      <span className="text-emerald-600 font-semibold">MC</span>
-                    </div>
-                    <div>
-                      <div className="font-semibold">Michael Chen</div>
-                      <div className="text-sm text-gray-600">Software Engineer</div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card className="border-gray-200">
-                <CardContent className="pt-6">
-                  <div className="flex items-center gap-1 mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                    ))}
-                  </div>
-                  <p className="text-gray-600 mb-4">
-                    "Finally, a finance app that's both powerful and beautiful. The interface is so intuitive and the
-                    insights are spot-on."
-                  </p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
-                      <span className="text-emerald-600 font-semibold">ER</span>
-                    </div>
-                    <div>
-                      <div className="font-semibold">Emily Rodriguez</div>
-                      <div className="text-sm text-gray-600">Small Business Owner</div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </section> */}
-
-        {/* CTA Section */}
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-r from-emerald-600 to-teal-600">
-          <div className="container px-4 md:px-6 mx-auto">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-white">
-                  Ready to take control of your finances?
-                </h2>
-                <p className="max-w-[600px] text-emerald-100 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Join thousands of users who have already transformed their financial lives with OUTMONI.
-                </p>
-              </div>
-              <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Link href="/auth/signin" >
-                  <Button size="lg" className="bg-white text-emerald-600 hover:bg-gray-100">
-                    Start Now
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button></Link>
-                {/* <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-white text-white hover:bg-white hover:text-emerald-600 bg-transparent"
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+              {[
+                { 
+                  icon: PieChart, 
+                  title: "Smart Expense Tracking", 
+                  desc: "AI categorizes your transactions instantly with machine learning.",
+                  color: "from-blue-500 to-cyan-500"
+                },
+                { 
+                  icon: Target, 
+                  title: "Budget Planner", 
+                  desc: "Plan, manage, and stick to your monthly goals effortlessly.",
+                  color: "from-purple-500 to-pink-500"
+                },
+                { 
+                  icon: TrendingUp, 
+                  title: "Investment Dashboard", 
+                  desc: "Track portfolio performance and growth in real-time.",
+                  color: "from-emerald-500 to-teal-500"
+                },
+                { 
+                  icon: Bell, 
+                  title: "Smart Alerts", 
+                  desc: "Bill reminders and unusual activity notifications instantly.",
+                  color: "from-orange-500 to-red-500"
+                },
+                { 
+                  icon: Sync, 
+                  title: "Bank Sync", 
+                  desc: "Connect all your accounts securely with bank-level encryption.",
+                  color: "from-indigo-500 to-purple-500"
+                },
+                { 
+                  icon: BarChart3, 
+                  title: "Deep Analytics", 
+                  desc: "Visual insights to improve financial decisions and habits.",
+                  color: "from-green-500 to-emerald-500"
+                },
+              ].map((f, i) => (
+                <Card
+                  key={i}
+                  className="group p-8 bg-white border border-slate-200 hover:border-slate-300 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 rounded-2xl relative overflow-hidden"
                 >
-                  Schedule Demo
-                </Button> */}
+                  {/* Gradient overlay on hover */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${f.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}></div>
+                  
+                  <CardHeader className="relative">
+                    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${f.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                      <f.icon className="h-8 w-8 text-white" />
+                    </div>
+                    <CardTitle className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-emerald-600 transition-colors">
+                      {f.title}
+                    </CardTitle>
+                    <CardDescription className="text-slate-600 text-base leading-relaxed">
+                      {f.desc}
+                    </CardDescription>
+                  </CardHeader>
+                </Card>
+              ))}
+            </div>
+
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="py-32 bg-gradient-to-br from-slate-900 via-emerald-900 to-teal-900 text-white relative overflow-hidden">
+          {/* Animated background elements */}
+          <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
+          <div className="absolute top-20 left-20 w-96 h-96 bg-emerald-500/20 blur-3xl rounded-full animate-pulse"></div>
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-teal-500/20 blur-3xl rounded-full animate-pulse" style={{ animationDelay: '2s' }}></div>
+          
+          <div className="container relative mx-auto px-6 md:px-12 text-center space-y-8">
+
+            <Badge className="bg-white/10 text-white border-white/20 backdrop-blur-sm px-4 py-1.5">
+              Ready to start?
+            </Badge>
+
+            <h2 className="text-5xl md:text-7xl font-extrabold tracking-tight leading-tight">
+              Ready to Transform{" "}
+              <span className="block bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
+                Your Finances?
+              </span>
+            </h2>
+
+            <p className="text-emerald-100 max-w-2xl mx-auto text-xl leading-relaxed">
+              Join thousands who already manage their money smarter with OUTMONI. Start your journey today.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+              <Link href="/auth/signin">
+                <Button className="bg-white text-emerald-600 px-10 py-7 text-lg rounded-2xl hover:bg-emerald-50 shadow-2xl hover:shadow-white/50 transition-all duration-300 hover:-translate-y-1 group font-semibold">
+                  Start Now 
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
+              
+              <Button variant="outline" className="border-2 border-white/20 hover:border-white/40 text-white hover:bg-white/10 px-8 py-7 text-lg rounded-2xl backdrop-blur-sm transition-all duration-300">
+                Schedule Demo
+              </Button>
+            </div>
+
+            <div className="flex items-center justify-center gap-8 text-emerald-200 text-sm pt-6">
+              <div className="flex items-center gap-2">
+                <Check className="h-4 w-4" /> 
+                <span>14-day free trial</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check className="h-4 w-4" /> 
+                <span>Cancel anytime</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Shield className="h-4 w-4" /> 
+                <span>Secure & private</span>
               </div>
             </div>
           </div>
         </section>
+
       </main>
 
-      {/* Footer */}
-      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t border-gray-200">
-        <div className="flex items-center gap-2">
-          <DollarSign className="h-6 w-6 text-emerald-600" />
-          <span className="text-sm font-semibold">OUTMONI</span>
+      {/* FOOTER */}
+      <footer className="py-12 px-6 md:px-12 border-t border-slate-200 bg-slate-50">
+        <div className="container mx-auto">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg">
+                <DollarSign className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <span className="font-bold text-xl text-slate-900">OUTMONI</span>
+                <p className="text-xs text-slate-500">Smart finance tracking</p>
+              </div>
+            </div>
+
+            <p className="text-sm text-slate-600">
+              Made with <span className="text-red-500">❤️</span> by{" "}
+              <span className="font-semibold text-slate-900">Akshay Shahi</span>
+            </p>
+
+            <nav className="flex gap-8 text-slate-600 text-sm">
+              <Link href="#" className="hover:text-emerald-600 transition-colors font-medium">
+                Terms
+              </Link>
+              <Link href="#" className="hover:text-emerald-600 transition-colors font-medium">
+                Privacy
+              </Link>
+              <Link href="#" className="hover:text-emerald-600 transition-colors font-medium">
+                Support
+              </Link>
+            </nav>
+
+          </div>
         </div>
-        <p className="text-xs text-gray-600 sm:ml-auto">Made by Akshay Shahi.</p>
-        <nav className="sm:ml-6 flex gap-4 sm:gap-6">
-          <Link className="text-xs hover:underline underline-offset-4 text-gray-600" href="#">
-            Terms of Service
-          </Link>
-          <Link className="text-xs hover:underline underline-offset-4 text-gray-600" href="#">
-            Privacy Policy
-          </Link>
-          <Link className="text-xs hover:underline underline-offset-4 text-gray-600" href="#">
-            Support
-          </Link>
-        </nav>
       </footer>
+
     </div>
   )
 }

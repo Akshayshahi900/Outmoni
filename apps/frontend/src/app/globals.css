@@ -120,3 +120,117 @@
     @apply bg-background text-foreground;
   }
 }
+/* Ensure these utilities exist */
+.text-success { color: rgb(var(--success)); }
+.text-danger { color: rgb(var(--danger)); }
+.bg-success\/10 { background-color: rgba(var(--success), 0.1); }
+.bg-danger\/10 { background-color: rgba(var(--danger), 0.1); }
+.bg-primary\/10 { background-color: rgba(var(--primary), 0.1); }
+.bg-primary\/15 { background-color: rgba(var(--primary), 0.15); }
+.bg-sub\/10 { background-color: rgba(var(--sub), 0.1); }
+
+/* For better dark mode experience */
+[data-theme="dark"] .group:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(var(--primary), 0.1);
+}
+
+/* Animation utilities */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInFromBottom {
+  from { 
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  animation: fadeIn 0.2s ease-out;
+}
+
+.fade-in {
+  animation: fadeIn 0.2s ease-out;
+}
+
+.slide-in-from-bottom-2 {
+  animation: slideInFromBottom 0.2s ease-out;
+}
+
+/* Custom scrollbar for mobile if needed */
+.overflow-x-auto::-webkit-scrollbar {
+  height: 4px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-track {
+  background: rgb(var(--border));
+  border-radius: 4px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb {
+  background: rgb(var(--primary));
+  border-radius: 4px;
+}
+
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes gradient {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-gradient {
+  background-size: 200% auto;
+  animation: gradient 3s linear infinite;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+  from { 
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to { 
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-in {
+  animation-fill-mode: both;
+}
+
+.fade-in {
+  animation: fadeIn 0.2s ease-out;
+}
+
+.zoom-in-95 {
+  animation: zoomIn 0.2s ease-out;
+}

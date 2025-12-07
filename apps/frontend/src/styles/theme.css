@@ -1,0 +1,53 @@
+/* Light Theme - Professional Finance */
+:root[data-theme="light"] {
+    --bg: 250 251 252;       /* #FAFBFC - Soft white */
+  --text: 17 24 39;        /* gray-900 - Deep charcoal */
+  --sub: 107 114 128;      /* gray-500 - Muted gray */
+  --card: 255 255 255;     /* white - Pure white cards */
+  --border: 229 231 235;   /* gray-200 - Subtle borders */
+  --primary: 16 185 129;   /* emerald-500 - Finance green */
+  --accent: 5 150 105;     /* emerald-600 - Darker green */
+  --success: 34 197 94;    /* green-500 */
+  --danger: 239 68 68;     /* red-500 */
+  --warning: 245 158 11;   /* amber-500 */
+}
+
+/* Dark Theme - Premium Modern Finance */
+:root[data-theme="dark"] {
+    --bg: 10 12 16;          /* #0A0C10 - Rich deep black */
+  --text: 248 250 252;     /* slate-50 - Crisp white */
+  --sub: 148 163 184;      /* slate-400 - Elegant gray */
+  --card: 20 24 31;        /* #14181F - Elevated dark cards */
+  --border: 30 36 47;      /* #1E242F - Sophisticated borders */
+  --primary: 52 211 153;   /* emerald-400 - Vibrant mint green */
+  --accent: 16 185 129;    /* emerald-500 - Deep emerald */
+  --success: 74 222 128;   /* green-400 */
+  --danger: 248 113 113;   /* red-400 */
+  --warning: 251 191 36;   /* amber-400 */
+  --glow: 52 211 153;      /* For subtle glow effects */
+}
+
+/* Utility classes */
+.bg-app { background-color: rgb(var(--bg)); }
+.text-app { color: rgb(var(--text)); }
+.text-sub { color: rgb(var(--sub)); }
+.bg-card { 
+    background-color: rgb(var(--card)); 
+}
+.border-app { border-color: rgb(var(--border)); }
+.bg-primary { background-color: rgb(var(--primary)); }
+.text-primary { color: rgb(var(--primary)); }
+.text-success { color: rgb(var(--success)); }
+.text-danger { color: rgb(var(--danger)); }
+.text-warning { color: rgb(var(--warning)); }
+
+/* Premium card effect for dark mode */
+[data-theme="dark"] .bg-card {
+    background: linear-gradient(135deg, rgb(20 24 31) 0%, rgb(17 21 28) 100%);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Subtle glow on interactive elements in dark mode */
+[data-theme="dark"] .bg-primary {
+    box-shadow: 0 0 20px rgba(var(--glow), 0.15);
+}
