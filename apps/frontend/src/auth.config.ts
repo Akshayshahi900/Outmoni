@@ -63,6 +63,7 @@ export const authConfig: NextAuthOptions = {
       }
       return token;
     },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async session({ session, token }: any) {
       // add id to the session object for NEXT.js usage
       // console.log("Session callback", session, token);

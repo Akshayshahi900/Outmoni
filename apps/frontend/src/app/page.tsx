@@ -151,7 +151,7 @@ export default async function Home() {
                   <Target className="h-10 w-10 text-emerald-600" />
                   <CardTitle>Budget Management</CardTitle>
                   <CardDescription>
-                    Set realistic budgets and get real-time alerts when you're approaching your limits.
+                    Set realistic budgets and get real-time alerts when you&apos;re approaching your limits.
                   </CardDescription>
                 </CardHeader>
               </Card>
