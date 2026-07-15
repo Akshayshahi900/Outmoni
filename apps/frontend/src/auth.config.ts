@@ -1,13 +1,55 @@
 import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
 import type { NextAuthOptions } from "next-auth";
-import { debug } from "console";
-import { UserRoundIcon } from "lucide-react";
+
+async function registerWithBackend(user: { id?: string | null; email?: string | null; name?: string | null; password?: string | null }) {
+  if (!user.email || !process.env.NEXT_PUBLIC_SERVER_URL) return;
+
+  await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/register`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      googleId: user.id ?? `credentials:${user.email}`,
+      email: user.email,
+      name: user.name,
+      password: user.password,
+      provider: user.password ? "credentials" : "google",
+    }),
+  });
+}
 
 export const authConfig: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+    CredentialsProvider({
+      name: "Email and password",
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
+        name: { label: "Name", type: "text" },
+      },
+      async authorize(credentials) {
+        const email = credentials?.email?.trim().toLowerCase();
+        const password = credentials?.password;
+
+        if (!email || !password || password.length < 6) return null;
+
+        await registerWithBackend({
+          id: `credentials:${email}`,
+          email,
+          name: credentials?.name || email.split("@")[0],
+          password,
+        });
+
+        return {
+          id: `credentials:${email}`,
+          email,
+          name: credentials?.name || email.split("@")[0],
+        };
+      },
     }),
   ],
   session: {
@@ -16,57 +58,29 @@ export const authConfig: NextAuthOptions = {
   pages: {
     signIn: "/auth/signin",
     signOut: "/auth/signout",
-    // error: "/auth/error",     // 👈 optional
   },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    async signIn({ user }) {
-
-
-      try {
-        // console.log('NextAuth signIn - attempting to register user:', user);
-
-        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/register`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            googleId: user.id,
-            email: user.email,
-            name: user.name
-          })
-        });
-
-        const data = await response.json();
-        // console.log('Registration response:', response.status, data);
-
-        if (!response.ok) {
-          console.error('Registration failed:', data);
+    async signIn({ user, account }) {
+      if (account?.provider === "google") {
+        try {
+          await registerWithBackend(user);
+        } catch (error) {
+          console.error("Error registering Google user:", error);
         }
-
-        return true;
-      } catch (error) {
-        console.error('Error registering user:', error);
-        return true; // Don't block login
       }
+      return true;
     },
     async jwt({ token, user }) {
-      //when user logs in for the first time 
-      // console.log("JWT callback with token and user", token, user);
-
       if (user) {
-
-        // token.accessToken = user.token;
         token.googleId = user.id;
-        token.userId = user.id as string; // add id to the JWT
+        token.userId = user.id as string;
         token.email = user.email as string;
         token.name = user.name as string;
       }
       return token;
     },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async session({ session, token }: any) {
-      // add id to the session object for NEXT.js usage
-      // console.log("Session callback", session, token);
       if (session.user) {
         session.userId = token.userId as string;
         session.user.email = token.email as string;
@@ -75,13 +89,6 @@ export const authConfig: NextAuthOptions = {
       }
       return session;
     },
-
-
-    //    async redirect() {
-    //   return `/dashboard`;
-    // }
-
   },
-  debug: true,
-}
-
+  debug: process.env.NODE_ENV === "development",
+};
