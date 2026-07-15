@@ -1,33 +1,51 @@
-name: Continuous Integration
+name: CI
 
 on:
   push:
     branches:
       - main
       - develop
-
   pull_request:
     branches:
       - main
       - develop
 
-jobs:
-  ci:
-    name: Lint • Typecheck • Test • Build
-    runs-on: ubuntu-latest
+# Least-privilege by default: this workflow only needs to read the repo.
+permissions:
+  contents: read
 
+# Cancel superseded runs for the same ref to save CI minutes.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: "22"
+  # Turborepo / tooling telemetry off in CI.
+  TURBO_TELEMETRY_DISABLED: "1"
+  DO_NOT_TRACK: "1"
+  # Never fund/audit-prompt during installs.
+  CI: "true"
+
+jobs:
+  verify:
+    name: Lint • Typecheck • Build
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: ${{ env.NODE_VERSION }}
           cache: yarn
 
-      - name: Install Dependencies
-        run: yarn install --immutable
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Generate Prisma client
+        run: yarn workspace backend prisma generate
 
       - name: Cache Turborepo
         uses: actions/cache@v4
@@ -37,7 +55,11 @@ jobs:
           restore-keys: |
             turbo-${{ runner.os }}-
 
-      - name: Run Lint
+      - name: Lint
         run: yarn turbo lint
-      - name: Build Applications
+
+      - name: Type check
+        run: yarn turbo check-types
+
+      - name: Build
         run: yarn turbo build

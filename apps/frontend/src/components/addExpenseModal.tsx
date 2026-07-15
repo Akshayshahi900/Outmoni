@@ -5,7 +5,15 @@ import { getSession, useSession } from "next-auth/react"
 import { useState } from "react"
 import { Bounce, ToastContainer, toast } from "react-toastify";
 
-export default function AddExpenseModal({ onAdd }: { onAdd: (data: any) => void }) {
+interface Expense {
+  id: number
+  title: string
+  amount: number
+  category: "income" | "expense"
+  date: string
+}
+
+export default function AddExpenseModal({ onAdd }: { onAdd: (data: Expense) => void }) {
 
 
   const { data: session } = useSession();

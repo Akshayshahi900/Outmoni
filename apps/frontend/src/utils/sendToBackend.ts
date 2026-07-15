@@ -1,7 +1,7 @@
 "use client"
 import { getSession } from "next-auth/react";
 
-export async function sendToBackend(data: any) {
+export async function sendToBackend(data: unknown) {
     const session = await getSession();
     if (!session) throw new Error("Not authenticated");
 

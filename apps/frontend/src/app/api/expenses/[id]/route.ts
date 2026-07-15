@@ -4,7 +4,7 @@ import { createJWT } from "@/lib/jwt";
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:5000";
 
-export async function DELETE(req: NextRequest, context: { params: { id: string } }) {
+export async function DELETE(req: NextRequest, context: { params: Promise<{ id: string }> }) {
   const { id } = await context.params;
 
   try {
@@ -26,7 +26,8 @@ export async function DELETE(req: NextRequest, context: { params: { id: string }
     }
 
     return NextResponse.json({ success: true }, { status: 200 });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message || "Server error" }, { status: 500 });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Server error";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

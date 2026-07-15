@@ -1,0 +1,30 @@
+# Render Blueprint (Infrastructure as Code) for the Outmoni backend.
+# Docs: https://render.com/docs/blueprint-spec
+#
+# This describes the intended configuration of the Express + Prisma backend that
+# lives in apps/backend. If you already created the service in the Render
+# dashboard, align its settings with the values below (Build/Start commands,
+# health check path and Node version). autoDeploy is disabled because deploys
+# are triggered from GitHub Actions (.github/workflows/deploy.yml) only after CI
+# passes on main.
+services:
+  - type: web
+    name: outmoni-backend
+    runtime: node
+    plan: free
+    region: oregon
+    # Build from the monorepo root so yarn workspaces resolve correctly.
+    buildCommand: yarn install --frozen-lockfile && yarn workspace backend build
+    startCommand: yarn workspace backend start
+    healthCheckPath: /
+    autoDeploy: false
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      # MongoDB Atlas connection string. Set as a secret in the Render dashboard.
+      # Never commit the real value.
+      - key: DATABASE_URL
+        sync: false
+      # Must match the frontend's NEXTAUTH_SECRET so JWTs verify across services.
+      - key: NEXTAUTH_SECRET
+        sync: false

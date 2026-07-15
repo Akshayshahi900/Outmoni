@@ -1,0 +1,78 @@
+name: Deploy
+
+# Runs only after the CI workflow succeeds on main. This guarantees we never
+# ship code that failed lint / typecheck / build, and never deploy from PRs.
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types:
+      - completed
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+# Never run two production deploys at once; do not cancel an in-flight deploy.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy-frontend:
+    name: Deploy Frontend (Vercel)
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    environment:
+      name: production
+      url: ${{ vars.FRONTEND_URL }}
+    steps:
+      - name: Trigger Vercel deploy hook
+        env:
+          VERCEL_DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "${VERCEL_DEPLOY_HOOK_URL}" ]; then
+            echo "::error::VERCEL_DEPLOY_HOOK_URL secret is not set. See docs/ci-cd.md"
+            exit 1
+          fi
+          echo "Triggering Vercel production deploy..."
+          curl -fsS -X POST "${VERCEL_DEPLOY_HOOK_URL}" -o /dev/null -w "Vercel hook responded: HTTP %{http_code}\n"
+
+  deploy-backend:
+    name: Deploy Backend (Render)
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    environment:
+      name: production
+      url: ${{ vars.BACKEND_URL }}
+    steps:
+      - name: Trigger Render deploy hook
+        env:
+          RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "${RENDER_DEPLOY_HOOK_URL}" ]; then
+            echo "::error::RENDER_DEPLOY_HOOK_URL secret is not set. See docs/ci-cd.md"
+            exit 1
+          fi
+          echo "Triggering Render production deploy..."
+          curl -fsS -X POST "${RENDER_DEPLOY_HOOK_URL}" -o /dev/null -w "Render hook responded: HTTP %{http_code}\n"
+
+      - name: Wait for backend health check
+        env:
+          BACKEND_URL: ${{ vars.BACKEND_URL }}
+        run: |
+          if [ -z "${BACKEND_URL}" ]; then
+            echo "BACKEND_URL variable not set; skipping health check."
+            exit 0
+          fi
+          echo "Polling ${BACKEND_URL} for a healthy response (up to ~5 min)..."
+          for i in $(seq 1 30); do
+            code=$(curl -s -o /dev/null -w "%{http_code}" "${BACKEND_URL}" || echo "000")
+            echo "Attempt ${i}/30: HTTP ${code}"
+            if [ "${code}" = "200" ]; then
+              echo "Backend is healthy."
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "::warning::Backend did not return HTTP 200 within the timeout. Render may still be building; check the Render dashboard."

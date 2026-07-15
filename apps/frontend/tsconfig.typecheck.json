@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.json",
+  "//": "Typecheck config for CI: excludes .next/types which only exist after `next build`.",
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", ".next"]
+}
