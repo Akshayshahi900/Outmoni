@@ -35,6 +35,11 @@ shipping code that failed lint, typecheck, or build.
   Environment, so you can add required reviewers / wait timers in repo settings.
 - **Static + supply-chain scanning:** CodeQL, gitleaks, dependency-review and
   `yarn audit` run on every change.
+
+> **Note:** `dependency-review` requires GitHub's **Dependency graph** to be
+> enabled (Settings → Code security → Dependency graph). Until then the job is
+> marked `continue-on-error: true` so it won't block. After enabling it, remove
+> `continue-on-error` in `security.yml` to make high-severity CVEs a hard gate.
 - **Concurrency guards:** CI cancels superseded runs; deploys never overlap.
 
 ## Required GitHub configuration
