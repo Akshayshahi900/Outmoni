@@ -1,21 +1,32 @@
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
-import type { NextAuthOptions } from "next-auth";
+import type { NextAuthOptions, User } from "next-auth";
 
-async function registerWithBackend(user: { id?: string | null; email?: string | null; name?: string | null; password?: string | null }) {
-  if (!user.email || !process.env.NEXT_PUBLIC_SERVER_URL) return;
+const backendUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 
-  await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/register`, {
+type BackendUser = { id: string; email: string; name?: string | null };
+
+async function callAuthEndpoint(path: "register" | "login", payload: Record<string, unknown>) {
+  if (!backendUrl) {
+    throw new Error("NEXT_PUBLIC_SERVER_URL is required for authentication");
+  }
+
+  const response = await fetch(`${backendUrl}/api/auth/${path}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      googleId: user.id ?? `credentials:${user.email}`,
-      email: user.email,
-      name: user.name,
-      password: user.password,
-      provider: user.password ? "credentials" : "google",
-    }),
+    body: JSON.stringify(payload),
   });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data?.error || "Authentication failed");
+  }
+
+  return data as BackendUser;
+}
+
+function toNextAuthUser(user: BackendUser): User {
+  return { id: user.id, email: user.email, name: user.name || user.email.split("@")[0] };
 }
 
 export const authConfig: NextAuthOptions = {
@@ -27,56 +38,54 @@ export const authConfig: NextAuthOptions = {
     CredentialsProvider({
       name: "Email and password",
       credentials: {
+        name: { label: "Name", type: "text" },
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
-        name: { label: "Name", type: "text" },
+        mode: { label: "Mode", type: "text" },
       },
       async authorize(credentials) {
         const email = credentials?.email?.trim().toLowerCase();
-        const password = credentials?.password;
+        const password = credentials?.password || "";
+        const mode = credentials?.mode === "register" ? "register" : "login";
 
-        if (!email || !password || password.length < 6) return null;
+        if (!email || password.length < 6) return null;
 
-        await registerWithBackend({
-          id: `credentials:${email}`,
+        const user = await callAuthEndpoint(mode, {
+          googleId: `credentials:${email}`,
           email,
-          name: credentials?.name || email.split("@")[0],
           password,
+          name: credentials?.name || email.split("@")[0],
+          provider: "credentials",
         });
 
-        return {
-          id: `credentials:${email}`,
-          email,
-          name: credentials?.name || email.split("@")[0],
-        };
+        return toNextAuthUser(user);
       },
     }),
   ],
-  session: {
-    strategy: "jwt",
-  },
-  pages: {
-    signIn: "/auth/signin",
-    signOut: "/auth/signout",
-  },
+  session: { strategy: "jwt" },
+  pages: { signIn: "/auth/signin", signOut: "/auth/signout" },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async signIn({ user, account }) {
-      if (account?.provider === "google") {
-        try {
-          await registerWithBackend(user);
-        } catch (error) {
-          console.error("Error registering Google user:", error);
-        }
+      if (account?.provider !== "google") return true;
+
+      try {
+        await callAuthEndpoint("register", {
+          googleId: user.id,
+          email: user.email,
+          name: user.name,
+          provider: "google",
+        });
+      } catch (error) {
+        console.error("Error registering Google user:", error);
       }
       return true;
     },
     async jwt({ token, user }) {
       if (user) {
-        token.googleId = user.id;
-        token.userId = user.id as string;
-        token.email = user.email as string;
-        token.name = user.name as string;
+        token.userId = user.id;
+        token.email = user.email;
+        token.name = user.name;
       }
       return token;
     },

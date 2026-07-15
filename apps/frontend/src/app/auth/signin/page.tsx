@@ -25,7 +25,7 @@ export default function SignInPage() {
         <CardContent className="space-y-4">
           <Button onClick={() => signIn("google", { callbackUrl: "/dashboard" })} className="w-full bg-emerald-600 hover:bg-emerald-700">Continue with Google</Button>
           <div className="relative text-center text-xs uppercase text-gray-500"><span className="bg-white px-2">or email login</span></div>
-          <form className="space-y-3" onSubmit={(event) => { event.preventDefault(); signIn("credentials", { email, password, callbackUrl: "/dashboard" }) }}>
+          <form className="space-y-3" onSubmit={(event) => { event.preventDefault(); signIn("credentials", { email, password, mode: "login", callbackUrl: "/dashboard" }) }}>
             <input value={email} onChange={(event) => setEmail(event.target.value)} type="email" required placeholder="Email" className="w-full rounded-xl border px-3 py-2" />
             <input value={password} onChange={(event) => setPassword(event.target.value)} type="password" required minLength={6} placeholder="Password" className="w-full rounded-xl border px-3 py-2" />
             <Button type="submit" className="w-full bg-slate-950 hover:bg-slate-800">Sign in with email</Button>

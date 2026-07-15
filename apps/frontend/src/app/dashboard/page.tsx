@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { ChangeEvent, useEffect, useMemo, useState } from "react"
 import type { LucideIcon } from "lucide-react"
 import {
   Area,
@@ -103,16 +103,41 @@ const goals: Goal[] = [
 ]
 
 const chartColors = ["#10b981", "#6366f1", "#f59e0b", "#ef4444", "#8b5cf6", "#06b6d4"]
+const storageKeys = { transactions: "outmoni.transactions", categories: "outmoni.categories" }
+
+function readStoredData<T>(key: string, fallback: T): T {
+  if (typeof window === "undefined") return fallback
+  const value = window.localStorage.getItem(key)
+  return value ? JSON.parse(value) as T : fallback
+}
+
+function downloadFile(filename: string, contents: string, type: string) {
+  const blob = new Blob([contents], { type })
+  const url = URL.createObjectURL(blob)
+  const anchor = document.createElement("a")
+  anchor.href = url
+  anchor.download = filename
+  anchor.click()
+  URL.revokeObjectURL(url)
+}
 
 export default function DashboardPage() {
-  const [transactions, setTransactions] = useState(initialTransactions)
-  const [categories, setCategories] = useState(initialCategories)
+  const [transactions, setTransactions] = useState<Transaction[]>(() => readStoredData(storageKeys.transactions, initialTransactions))
+  const [categories, setCategories] = useState<Category[]>(() => readStoredData(storageKeys.categories, initialCategories))
   const [search, setSearch] = useState("")
   const [typeFilter, setTypeFilter] = useState<TransactionType | "all">("all")
   const [categoryFilter, setCategoryFilter] = useState("all")
   const [page, setPage] = useState(1)
   const [form, setForm] = useState({ merchant: "", amount: "", type: "expense" as TransactionType, category: "Food", note: "", paymentMethod: "UPI", account: "UPI", date: "2026-07-15", tags: "", recurring: false, recurringFrequency: "none" as RecurringFrequency, attachment: "" })
   const [newCategory, setNewCategory] = useState("")
+
+  useEffect(() => {
+    window.localStorage.setItem(storageKeys.transactions, JSON.stringify(transactions))
+  }, [transactions])
+
+  useEffect(() => {
+    window.localStorage.setItem(storageKeys.categories, JSON.stringify(categories))
+  }, [categories])
 
   const pageSize = 5
   const monthTransactions = transactions.filter((transaction) => transaction.date.startsWith("2026-07"))
@@ -154,6 +179,37 @@ export default function DashboardPage() {
 
   const deleteTransaction = (id: number) => setTransactions((current) => current.filter((transaction) => transaction.id !== id))
 
+  const exportCsv = () => {
+    const header = ["date", "merchant", "amount", "type", "category", "note", "paymentMethod", "account", "tags", "recurring", "recurringFrequency", "attachment"]
+    const rows = transactions.map((transaction) => header.map((key) => {
+      const value = key === "tags" ? transaction.tags.join("|") : String(transaction[key as keyof Transaction] ?? "")
+      return `"${value.replaceAll('"', '""')}"`
+    }).join(","))
+    downloadFile("outmoni-transactions.csv", [header.join(","), ...rows].join("\n"), "text/csv")
+  }
+
+  const exportJson = () => downloadFile("outmoni-export.json", JSON.stringify({ transactions, categories, accounts: initialAccounts, bills: initialBills, goals }, null, 2), "application/json")
+
+  const exportPdf = () => window.print()
+
+  const importCsv = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (!file) return
+    const text = await file.text()
+    const [, ...lines] = text.split(/\r?\n/).filter(Boolean)
+    const imported = lines.map((line, index) => {
+      const [date, merchant, amount, type, category, note, paymentMethod, account, tags] = line.split(",").map((cell) => cell.replace(/^"|"$/g, ""))
+      return { id: Date.now() + index, date: date || new Date().toISOString().slice(0, 10), merchant: merchant || "Imported", amount: Number(amount) || 0, type: (type as TransactionType) || "expense", category: category || "Imported", note: note || "Imported bank statement", paymentMethod: paymentMethod || "Bank", account: account || "Imported account", tags: tags ? tags.split("|") : ["imported"], recurring: false, recurringFrequency: "none" as RecurringFrequency }
+    })
+    setTransactions((current) => [...imported, ...current])
+    event.target.value = ""
+  }
+
+  const runRecurring = () => {
+    const generated = transactions.filter((transaction) => transaction.recurring).map((transaction) => ({ ...transaction, id: Date.now() + transaction.id, date: "2026-08-01", note: `${transaction.note} · auto-generated`, tags: [...new Set([...transaction.tags, "recurring"])] }))
+    setTransactions((current) => [...generated, ...current])
+  }
+
   const addCategory = () => {
     if (!newCategory) return
     setCategories((current) => [...current, { id: Date.now(), name: newCategory, type: form.type === "income" ? "income" : "expense", budget: form.type === "expense" ? 10000 : undefined }])
@@ -172,8 +228,10 @@ export default function DashboardPage() {
             <p className="mt-3 max-w-2xl text-slate-300">Email/password and Google auth, advanced transactions, accounts, budgets, goals, recurring bills, notifications, imports, exports, and analytics in one workspace.</p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <button className="rounded-full bg-emerald-400 px-5 py-3 font-semibold text-slate-950"><Download className="mr-2 inline h-4 w-4" />Export CSV / Excel / PDF</button>
-            <button className="rounded-full border border-white/15 px-5 py-3 font-semibold"><FileSpreadsheet className="mr-2 inline h-4 w-4" />Import bank CSV</button>
+            <button onClick={exportCsv} className="rounded-full bg-emerald-400 px-5 py-3 font-semibold text-slate-950"><Download className="mr-2 inline h-4 w-4" />Export CSV</button>
+            <button onClick={exportJson} className="rounded-full bg-white px-5 py-3 font-semibold text-slate-950"><Download className="mr-2 inline h-4 w-4" />Export Excel-ready JSON</button>
+            <button onClick={exportPdf} className="rounded-full border border-white/15 px-5 py-3 font-semibold"><Download className="mr-2 inline h-4 w-4" />Print PDF</button>
+            <label className="cursor-pointer rounded-full border border-white/15 px-5 py-3 font-semibold"><FileSpreadsheet className="mr-2 inline h-4 w-4" />Import bank CSV<input type="file" accept=".csv,text/csv" onChange={importCsv} className="hidden" /></label>
           </div>
         </div>
 
@@ -206,7 +264,7 @@ export default function DashboardPage() {
             <div className="mt-4 flex items-center justify-between text-sm text-slate-300"><span>Page {page} of {totalPages} · {filteredTransactions.length} results</span><div className="space-x-2"><button disabled={page === 1} onClick={() => setPage((value) => Math.max(1, value - 1))} className="rounded-full border border-white/10 px-4 py-2 disabled:opacity-40">Prev</button><button disabled={page === totalPages} onClick={() => setPage((value) => Math.min(totalPages, value + 1))} className="rounded-full border border-white/10 px-4 py-2 disabled:opacity-40">Next</button></div></div>
           </div>
           <div className="space-y-6">
-            <div className="rounded-[2rem] border border-white/10 bg-white/[0.08] p-5 shadow-xl backdrop-blur"><h2 className="mb-4 text-xl font-bold">Upcoming bills & notifications</h2>{initialBills.map((bill) => <div key={bill.id} className="mb-3 rounded-2xl bg-slate-950/50 p-4"><div className="flex items-center justify-between"><span className="font-semibold">{bill.name}</span><BellRing className="h-4 w-4 text-amber-300" /></div><p className="text-sm text-slate-400">{currency.format(bill.amount)} due {bill.dueDate} · {bill.autoPay ? "auto-pay" : "manual"}</p></div>)}<p className="rounded-2xl bg-rose-500/15 p-3 text-sm text-rose-100">Budget exceed alerts, recurring transaction reminders, bill nudges, and goal milestones are enabled.</p></div>
+            <div className="rounded-[2rem] border border-white/10 bg-white/[0.08] p-5 shadow-xl backdrop-blur"><h2 className="mb-4 text-xl font-bold">Upcoming bills & notifications</h2>{initialBills.map((bill) => <div key={bill.id} className="mb-3 rounded-2xl bg-slate-950/50 p-4"><div className="flex items-center justify-between"><span className="font-semibold">{bill.name}</span><BellRing className="h-4 w-4 text-amber-300" /></div><p className="text-sm text-slate-400">{currency.format(bill.amount)} due {bill.dueDate} · {bill.autoPay ? "auto-pay" : "manual"}</p></div>)}<button onClick={runRecurring} className="mb-3 w-full rounded-2xl bg-emerald-400 px-4 py-3 font-bold text-slate-950">Generate recurring transactions</button><p className="rounded-2xl bg-rose-500/15 p-3 text-sm text-rose-100">Budget exceed alerts, recurring transaction reminders, bill nudges, and goal milestones are enabled.</p></div>
             <div className="rounded-[2rem] border border-white/10 bg-white/[0.08] p-5 shadow-xl backdrop-blur"><h2 className="mb-4 text-xl font-bold">Custom categories</h2><div className="flex gap-2"><input value={newCategory} onChange={(e) => setNewCategory(e.target.value)} placeholder="Create category" className="min-w-0 flex-1 rounded-2xl bg-slate-950/70 px-3 py-2" /><button onClick={addCategory} className="rounded-2xl bg-white px-4 font-bold text-slate-950">Add</button></div><div className="mt-3 flex flex-wrap gap-2">{categories.map((category) => <span key={category.id} className="rounded-full bg-white/10 px-3 py-1 text-sm">{category.name}</span>)}</div></div>
           </div>
         </div>

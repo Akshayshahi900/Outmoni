@@ -25,7 +25,7 @@ export default function SignUpPage() {
         </CardHeader>
         <CardContent className="space-y-4">
           <Button onClick={() => signIn("google", { callbackUrl: "/dashboard" })} className="w-full bg-emerald-600 hover:bg-emerald-700">Continue with Google</Button>
-          <form className="space-y-3" onSubmit={(event) => { event.preventDefault(); signIn("credentials", { name, email, password, callbackUrl: "/dashboard" }) }}>
+          <form className="space-y-3" onSubmit={(event) => { event.preventDefault(); signIn("credentials", { name, email, password, mode: "register", callbackUrl: "/dashboard" }) }}>
             <input value={name} onChange={(event) => setName(event.target.value)} required placeholder="Full name" className="w-full rounded-xl border px-3 py-2" />
             <input value={email} onChange={(event) => setEmail(event.target.value)} type="email" required placeholder="Email" className="w-full rounded-xl border px-3 py-2" />
             <input value={password} onChange={(event) => setPassword(event.target.value)} type="password" required minLength={6} placeholder="Password" className="w-full rounded-xl border px-3 py-2" />
