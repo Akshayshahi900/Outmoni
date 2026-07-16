@@ -259,7 +259,7 @@ const ExpenseList: React.FC = () => {
             </p>
             <p className="text-lg font-semibold text-gray-900">
               Total:{" "}
-              <span className="text-red-600">${totalAmount.toFixed(2)}</span>
+              <span className="text-green-600">${totalAmount.toFixed(2)}</span>
             </p>
           </div>
         </div>
